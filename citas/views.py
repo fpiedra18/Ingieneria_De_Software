@@ -361,9 +361,9 @@ def guardar_cita_protegida(request):
                 fecha=fecha,
                 hora=hora,
             )
-
+            
             try:
-                event_id = crear_evento_en_calendar(nombre, tratamiento.nombre, fecha, hora, contacto)
+                event_id = crear_evento_en_calendar(nombre, tratamiento.nombre, fecha, hora, contacto, especialista_asignado.nombre)
                 if event_id:
                     nueva_cita.calendar_event_id = event_id
                     nueva_cita.save()
