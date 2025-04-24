@@ -1,0 +1,40 @@
+
+body {
+    font-family: "Quicksand", sans-serif;
+    scroll-behavior: smooth;
+  }
+  .btn-agendar {
+    background-color: #5dc1b9;
+    color: white;
+    border-radius: 20px;
+    padding: 6px 20px;
+  }
+  .btn-agendar:hover {
+    background-color: #5dc1b9;
+  }
+
+
+
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 55px;
+  height: 55px;
+  background-color: rgb(68, 162, 61);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  background-color: rgb(86, 156, 69);
+}
