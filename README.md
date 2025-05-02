@@ -51,94 +51,112 @@ El panel de administración permite a los encargados de la clínica gestionar tr
 ## 📂 Estructura del proyecto
 
 ```bash
-NaturaClick/
-├── config/                 # Configuración de Django (settings, urls)
-├── treatments/             # App principal: modelos, vistas, plantillas y URLs
+Ingieneria_De_Software/       # Repositorio y proyecto Django principal
+├── citas/                    # Aplicación principal para gestión de citas
+│   ├── __pycache__/
 │   ├── migrations/
-│   ├── templates/
-│   │   ├── tratamientos.html
-│   │   └── detalle_tratamiento.html
-│   └── static/
-│       ├── css/
-│       │   └── tratamientos.css
-│       └── js/
-│           └── swiper-init.js
-├── specialists/            # Gestión de especialistas y horarios
-├── appointments/           # Lógica de citas y bloqueos de horario
-├── requirements.txt        # Dependencias de Python
-├── Procfile                # Configuración de despliegue (Heroku)
-├── Dockerfile              # Contenedor Docker
-└── README.md               # Documentación del proyecto
+│   ├── admin.py
+│   ├── apps.py
+│   ├── calendar_sync.py     # Sincronización con Google Calendar
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── credentials/              # Credenciales de APIs (no subir a repo público)
+│   ├── credentials.json      # Google Calendar
+│   └── token.json            # Token OAuth generado
+├── media/                    # Archivos subidos por usuarios
+├── proyecto/                 # Configuración global de Django
+│   ├── __pycache__/
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── static/                   # Activos estáticos
+│   ├── css/
+│   │   ├── agendar_protegido.css
+│   │   ├── agendar.css
+│   │   ├── base.css
+│   │   ├── clases.css
+│   │   ├── detalle_tratamiento.css
+│   │   ├── estilo.css
+│   │   └── gracias.css
+│   ├── img/                  # Imágenes de UI (logo, hero, placeholders)
+│   └── js/
+│       └── agendar_protegido.js
+├── templates/                # Plantillas HTML
+│   ├── includes/             # Componentes parciales (header, footer, etc.)
+│   └── [varias vistas .html]
+├── db.sqlite3                # Base de datos SQLite (db.sqlite3)
+├── google_auth.py            # Lógica de autenticación OAuth con Google
+├── manage.py                 # Comandos de gestión Django
+└── .gitignore                # Ignora archivos sensibles y __pycache__
 ```
 
 ---
 
-## ⚙️ Instalación y ejecución
+## ⚙️ Configuración del proyecto en Visual Studio Code
 
-1. **Clonar repositorio**:
+A continuación se describe cómo clonar el repositorio, abrirlo en VS Code y manejar commits y ramas desde el IDE.
+
+1. **Clonar desde GitHub y abrir en VS Code**:
 
    ```bash
-   git clone https://github.com/tu-usuario/NaturaClick.git
-   cd NaturaClick
+   git clone https://github.com/tu-usuario/Ingieneria_De_Software.git
+   cd Ingieneria_De_Software
+   code .                   # Abre el proyecto en Visual Studio Code
    ```
 
-2. **Configurar entorno**:
+2. **Instalar dependencias (si las hubiera)**:
 
-   * Crear un entorno virtual e instalar dependencias:
+   * Este proyecto utiliza únicamente Python  y Django; no hay `requirements.txt`. Si agregas paquetes, recuerda instalarlos con:
 
      ```bash
-     python -m venv venv
-     source venv/bin/activate
-     pip install -r requirements.txt
+     pip install <paquete>
      ```
 
-3. **Variables de entorno**:
+3. **Configurar la base de datos**:
 
-   * Copiar `.env.example` a `.env` y completar:
+   * Se usa **SQLite** por defecto. El archivo está en `db.sqlite3`. No se requieren ajustes adicionales.
 
-     ```env
-     SECRET_KEY=tu_secret_key
-     DEBUG=True
-     DATABASE_URL=sqlserver://usuario:pass@host:port/dbname
-     GOOGLE_CALENDAR_CREDENTIALS=path/to/credentials.json
-     TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxx
-     TWILIO_AUTH_TOKEN=your_token
+4. **Ejecutar servidor de desarrollo**:
+
+   * En VS Code, abre una terminal integrada y ejecuta:
+
+     ```bash
+     python manage.py migrate
+     python manage.py runserver
+     ```
+   * Accede en tu navegador a `http://localhost:8000`.
+
+5. **Versionado y ramas en Git desde VS Code**:
+
+   * **Commit directo en `main`**:
+
+     1. Haz cambios en archivos.
+     2. Ve a la sección Source Control (ícono de rama o Ctrl+Shift+G).
+     3. Escribe un mensaje descriptivo y pulsa el icono ✓ para hacer commit.
+     4. Haz click en el icono de los tres puntos (…) y selecciona **Push** para subir a `main`.
+
+   * **Trabajo en ramas**:
+
+     1. En VS Code, selecciona la rama actual (`main`) en la barra inferior.
+     2. Elige **Create new branch** y nómbrala, por ejemplo, `feature/mi-nueva-funcionalidad`.
+     3. Realiza commits en esa rama (igual que en main).
+     4. Para subir la rama al repositorio remoto, ve a Source Control, haz click en **Publish Branch**.
+     5. Desde GitHub, podrás abrir un Pull Request para revisar e integrar a `main`.
+
+6. **Integración posterior**:
+
+   * **Merge desde GitHub**: Una vez aprobado el Pull Request, GitHub integra la rama en `main`.
+   * **Actualizar tu copia local**:
+
+     ```bash
+     git checkout main
+     git pull origin main
      ```
 
-4. **Migraciones y datos iniciales**:
-
-   ```bash
-   python manage.py migrate
-   python manage.py loaddata initial_data.json
-   ```
-
-5. **Ejecutar servidor de desarrollo**:
-
-   ```bash
-   python manage.py runserver
-   ```
-
-   Accede a `http://localhost:8000`.
-
 ---
-
-## 🛡️ Buenas prácticas y contribución
-
-* Sigue el estilo PEP8 para Python y principios SOLID.
-* Mantén el frontend organizado con componentes reutilizables.
-* Crea ramas por cada feature o bugfix (`feature/nueva-funcionalidad`).
-* Abre Pull Requests bien descritos y referenciando issues.
-* Aceptamos contribuciones: crea un issue antes de implementar cambios relevantes.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia **MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
----
-
-> Creado con ❤️ por el equipo de **Clínica Natura**. ¡Bienvenido/a!
 
 
 
