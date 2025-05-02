@@ -1,129 +1,178 @@
+/* General */
 body {
-    background-color: #fff6ed;
-    font-family: 'Segoe UI', sans-serif;
-    color: #333;
-  }
-  
-  .hero-tratamiento {
-    background-image: url('/static/img/imagen_hero.png');
+  background-color: #fff6ed;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 100px 20px;
-    color: #666; /* Gris combinable */
-    text-align: center;
-    text-shadow: 0px 3px 10px rgba(255, 255, 255, 0.5);
-    border-bottom: 5px solid #5dc1b9;
-    position: relative;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+/* Tarjeta principal */
+.card-detalle-tratamiento {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+  max-width: 950px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Imagen arriba */
+.imagen-principal-wrapper {
+  width: 100%;
+  max-width: 450px;
+  height: 300px; /* Altura fija para todas */
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.imagen-principal {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Información abajo */
+.info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+}
+
+.titulo-tratamiento {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #5dc1b9, #3e7f74);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitulo {
+  color: #5e5e5e;
+  font-size: 1.1rem;
+  margin-top: 5px;
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #eee;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.descripcion-detalle {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 10px;
+  margin-top: 0;
+  text-align: justify;
+}
+
+/* Botón */
+.btn-agendar-profesional {
+  background-color: #5dc1b9;
+  color: #fff6ed;
+  font-weight: bold;
+  padding: 14px 35px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(93, 193, 185, 0.4);
+  display: inline-block;
+}
+
+.btn-agendar-profesional:hover {
+  background-color: #47ada3;
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(71, 173, 163, 0.5);
+}
+
+.titulo-seccion-especial {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #3e7f74;
+  margin-bottom: 15px;
+  border-left: 5px solid #5dc1b9;
+  padding-left: 12px;
+  text-align: left;
+}
+
+.seccion-secundaria {
+  margin-top: 20px;
+}
+
+.descripcion-secundaria-box {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: none;
+  border-left: 3px solid #5dc1b9;
+  margin-top: 0;
+}
+
+.imagen-secundaria-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.img-secundaria {
+  width: 100%;
+  max-width: 500px;
+  height: 320px; /* altura fija */
+  border-radius: 18px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.img-secundaria:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .imagen-principal-wrapper {
+    max-width: 100%;
   }
-  
-  .hero-titulo {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin: 0;
+
+  .titulo-tratamiento {
+    font-size: 1.8rem;
   }
-  
-  @media (max-width: 768px) {
-    .hero-tratamiento {
-      padding: 60px 15px;
-    }
-  
-    .hero-titulo {
-      font-size: 1.8rem;
-    }
-  }
-  
-  
-  .detalle-card {
-    max-width: 700px;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
-    overflow: hidden;
-  }
-  
-  .detalle-imagen-wrapper {
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  .detalle-imagen {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-  }
-  
-  .detalle-contenido {
-    padding: 30px 20px;
-  }
-  
-  .detalle-titulo {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #5dc1b9;
-    margin-bottom: 20px;
-  }
-  
-  .detalle-info {
-    font-weight: 500;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: #555;
-  }
-  
-  .detalle-descripcion {
+
+  .btn-agendar-profesional {
+    padding: 12px 25px;
     font-size: 1.05rem;
-    color: #666;
-    margin-bottom: 25px;
   }
-  
-  .btn-consultar {
-    background-color: transparent;
-    border: 2px solid #5dc1b9;
-    color: #5dc1b9;
-    font-weight: 600;
-    padding: 8px 24px;
+
+  .img-secundaria {
+    max-width: 100%;
+  }
+
+  .descripcion-detalle {
     font-size: 1rem;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
+    line-height: 1.5;
   }
-  
-  .btn-consultar:hover {
-    background-color: #5dc1b9;
-    color: #fff6ed;
-  }
-  
-  .otros-tratamientos h3 {
-    font-weight: 700;
-    color: #5dc1b9;
-  }
-  
-  .card .btn-consultar {
-    margin-top: 15px;
-  }
-  
-  .card-body h5 {
-    color: #333;
-  }
-  
-  /* Responsividad */
-  @media (max-width: 768px) {
-    .detalle-titulo {
-      font-size: 1.6rem;
-    }
-    .detalle-descripcion {
-      font-size: 0.95rem;
-    }
-    .hero-titulo {
-      font-size: 1.8rem;
-    }
-  }
-  
+}

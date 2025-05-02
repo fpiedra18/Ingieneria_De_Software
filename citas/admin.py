@@ -6,7 +6,7 @@ from .models import Especialista
 @admin.register(Tratamiento)
 class TratamientoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'intervalo_minutos', 'precio')
-    search_fields = ('nombre',)
+    fields = ('nombre', 'precio', 'intervalo_minutos', 'descripcion_larga', 'descripcion_secundaria', 'imagen', 'imagen_secundaria')
    
 @admin.register(Especialista)
 class EspecialistaAdmin(admin.ModelAdmin):
