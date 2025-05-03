@@ -11,9 +11,12 @@ class HorarioAtencion(models.Model):
 
     def __str__(self):
         return f"Horario: {self.hora_inicio} - {self.hora_fin}"
+    
 class Tratamiento(models.Model):
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
+    descripcion_corta = models.CharField(max_length=200, blank=True, null=True)
+    descripcion_larga = models.TextField(blank=True, null=True)
+    descripcion_secundaria = models.TextField(blank=True, null=True)  # <-- AGREGAR ESTA LÍNEA
     intervalo_minutos = models.PositiveIntegerField(
         default=60,
         validators=[MinValueValidator(10), MaxValueValidator(180)],
@@ -21,6 +24,7 @@ class Tratamiento(models.Model):
     )
     precio = models.CharField(max_length=20)  # Ejemplo: '₡25,000'
     imagen = models.ImageField(upload_to='tratamientos/', blank=True, null=True)
+    imagen_secundaria = models.ImageField(upload_to='tratamientos/', blank=True, null=True)
 
     def __str__(self):
         return self.nombre

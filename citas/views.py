@@ -14,6 +14,8 @@ def inicio(request):
 def detalle_tratamiento(request, tratamiento_id):
     tratamiento = get_object_or_404(Tratamiento, id=tratamiento_id)
     return render(request, 'detalle_tratamiento.html', {'tratamiento': tratamiento})
+def prueba(request):
+    return render(request, 'prueba.html')
 
 def obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha):
     horarios_disponibles = []
@@ -361,9 +363,9 @@ def guardar_cita_protegida(request):
                 fecha=fecha,
                 hora=hora,
             )
-
+            
             try:
-                event_id = crear_evento_en_calendar(nombre, tratamiento.nombre, fecha, hora, contacto)
+                event_id = crear_evento_en_calendar(nombre, tratamiento.nombre, fecha, hora, contacto, especialista_asignado.nombre)
                 if event_id:
                     nueva_cita.calendar_event_id = event_id
                     nueva_cita.save()
