@@ -408,3 +408,10 @@ def dias_disponibles(request):
 
     return JsonResponse({'dias': dias_disponibles})
 
+from .models import Tratamiento
+
+def lista_tratamientos(request):
+    tratamientos = Tratamiento.objects.all()
+    return render(request, 'tratamientos/lista_tratamientos.html', {'tratamientos': tratamientos})
+
+

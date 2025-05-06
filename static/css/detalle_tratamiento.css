@@ -1,3 +1,7 @@
+/* =======================
+   Vista: Detalle Tratamiento 
+   ======================= */
+
 /* General */
 body {
   background-color: #fff6ed;
@@ -152,10 +156,34 @@ body {
   transform: scale(1.02);
 }
 
-/* Responsive */
-@media (max-width: 576px) {
+/* =======================
+   🔧 Responsividad agregada
+   ======================= */
+
+/* Ajustes para pantallas medianas */
+@media (max-width: 992px) {
+  .card-detalle-tratamiento {
+    padding: 30px;
+    gap: 25px;
+  }
+
+  .titulo-tratamiento {
+    font-size: 2rem;
+  }
+
+  .descripcion-detalle {
+    font-size: 1.05rem;
+  }
+}
+
+/* Ajustes para tablets */
+@media (max-width: 768px) {
+  .card-detalle-tratamiento {
+    padding: 25px;
+  }
+
   .imagen-principal-wrapper {
-    max-width: 100%;
+    height: 250px;
   }
 
   .titulo-tratamiento {
@@ -163,16 +191,50 @@ body {
   }
 
   .btn-agendar-profesional {
-    padding: 12px 25px;
-    font-size: 1.05rem;
-  }
-
-  .img-secundaria {
-    max-width: 100%;
+    font-size: 1.1rem;
+    padding: 12px 28px;
   }
 
   .descripcion-detalle {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
+  }
+}
+
+/*  Ajustes para celulares */
+@media (max-width: 576px) {
+  .card-detalle-tratamiento {
+    padding: 20px;
+  }
+
+  .imagen-principal-wrapper {
+    max-width: 100%;
+    height: 200px;
+  }
+
+  .titulo-tratamiento {
+    font-size: 1.6rem;
+  }
+
+  .btn-agendar-profesional {
+    font-size: 1rem;
+    padding: 10px 20px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .descripcion-detalle {
+    font-size: 0.95rem;
+    text-align: left;
+  }
+
+  .descripcion-secundaria-box {
+    padding: 15px;
+  }
+
+  .img-secundaria {
+    height: auto;
+    max-height: 250px;
+    max-width: 100%;
   }
 }

@@ -1,0 +1,140 @@
+/* === Reset y configuración global === */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff6ed;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* === Contenedor general === */
+  .container, .container-agendar {
+    max-width: 1200px;
+    margin: auto;
+    padding: 30px 20px;
+  }
+  
+  /* === Responsividad general === */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .row {
+    flex-wrap: wrap;
+  }
+  
+  [class*="col-"] {
+    flex: 1 0 auto;
+    padding: 10px;
+  }
+  
+  /* === Ajustes generales responsivos === */
+  @media (max-width: 992px) {
+    .container, .container-agendar {
+      padding: 20px 15px;
+    }
+  
+    .titulo-tratamiento,
+    .titulo-hero,
+    .titulo-equipo,
+    .titulo-principal {
+      font-size: 2rem;
+      text-align: center;
+    }
+  
+    .swiper-wrapper-externo {
+      padding: 0 20px;
+    }
+  
+    .btn-agendar,
+    .btn-natura,
+    .btn-natura-hero,
+    .btn-agendar-profesional {
+      width: 100%;
+      font-size: 1rem;
+      padding: 12px 20px;
+      text-align: center;
+    }
+  
+    .card-detalle-tratamiento {
+      padding: 20px;
+    }
+  
+    .imagen-principal-wrapper,
+    .img-secundaria {
+      height: auto;
+      max-height: 250px;
+    }
+  
+    .team-member {
+      width: 100% !important;
+      height: auto;
+    }
+  }
+  
+  /* === Slider (Swiper) solo muestra 1 tratamiento en móvil === */
+  @media (max-width: 576px) {
+    .swiper-wrapper {
+      flex-wrap: nowrap;
+    }
+  
+    .swiper-slide {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  
+    .tratamiento-card {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+  
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none;
+    }
+  
+    .titulo-tratamientos {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+  
+    .descripcion-equipo {
+      padding: 10px;
+      font-size: 1rem;
+    }
+  }
+  
+  /* === WhatsApp botón flotante === */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
+    background-color: rgb(68, 162, 61);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .whatsapp-float:hover {
+    background-color: rgb(86, 156, 69);
+  }
+  
