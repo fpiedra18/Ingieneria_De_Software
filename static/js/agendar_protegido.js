@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
         background: "#fff",
       });
     } else {
-      // ✅ Bloquear segundo envío
+      // Bloquear segundo envío
       yaEnviado = true;
       submitBtn.disabled = true;
       submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status"></span> Cargando...`;
