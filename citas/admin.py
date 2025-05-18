@@ -12,7 +12,7 @@ class TratamientoAdmin(admin.ModelAdmin):
 class EspecialistaAdmin(admin.ModelAdmin):
     list_display = ('nombre',)
     search_fields = ('nombre',)
-    filter_horizontal = ('especialidades',)  # ✅ Aquí sí.
+    filter_horizontal = ('especialidades',)  # Aquí sí. asasassa
 
 
 @admin.register(Cita)
