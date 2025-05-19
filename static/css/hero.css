@@ -1,0 +1,76 @@
+/* ===== Hero ===== */
+.hero-highlight {
+  color: #5dc1b9;
+}
+
+.titulo-hero {
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+
+.destacado-natura {
+  font-weight: 800;
+  background: linear-gradient(135deg, #5dc1b9, #8cbfa7, #5dc1b9);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: moveGradient 4s ease-in-out infinite;
+}
+
+/* Animación suave del degradado */
+@keyframes moveGradient {
+  0% {
+    background-position: 0% center;
+  }
+
+  50% {
+    background-position: 100% center;
+  }
+
+  100% {
+    background-position: 0% center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-natura {
+    background-position: center top;
+  }
+}
+
+.btn-natura-hero {
+  background: linear-gradient(135deg, #5dc1b9, #8cbfa7);
+  color: white;
+  font-weight: 700;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.btn-natura-hero:hover {
+  background: linear-gradient(135deg, #4db0a5, #7da692);
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.hero-natura {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+
+  @media (max-width: 768px) {
+    .hero-natura {
+      background-position: center top;
+    }
+  }
+

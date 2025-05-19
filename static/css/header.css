@@ -1,0 +1,34 @@
+
+/* ===== Header ===== */
+.logo-natura {
+  color: #5dc1b9; /* o el color que querés usar */
+}
+
+
+.navbar-brand {
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  margin: 0 10px;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color:#5dc1b9 !important;
+}
+
+.btn-agendar {
+  background-color:#5dc1b9;
+  color: #fff6ed;
+  padding: 8px 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-agendar:hover {
+  background-color: #5e5e5e;
+  transform: scale(1.05);
+}
+
