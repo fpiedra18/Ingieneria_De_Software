@@ -1,33 +1,41 @@
-
+/* ===== Estilo general del cuerpo ===== */
 body {
-    background-color: #F6F8F3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: 'Segoe UI', sans-serif;
-  }
-  .card {
-    max-width: 500px;
-    padding: 40px;
-    text-align: center;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
-  }
-  .card i {
-    font-size: 48px;
-    color: #77B28C;
-    margin-bottom: 20px;
-  }
-  .btn-natura {
-    background-color: #A6B8A1;
-    color: white;
-    padding: 10px 25px;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .btn-natura:hover {
-    background-color: #8CA893;
-  }
+  background-color: #F6F8F3; /* Fondo claro, verde muy suave */
+  display: flex; /* Centra el contenido horizontalmente */
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  height: 100vh; /* Ocupa toda la altura visible */
+  font-family: 'Segoe UI', sans-serif; /* Fuente moderna */
+}
+
+/* ===== Tarjeta central de mensaje (usada en página de agradecimiento, por ejemplo) ===== */
+.card {
+  max-width: 500px; /* Ancho máximo */
+  padding: 40px; /* Espaciado interno */
+  text-align: center; /* Centrado de texto */
+  background-color: #ffffff; /* Fondo blanco puro */
+  border-radius: 20px; /* Bordes redondeados */
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Ícono dentro de la tarjeta */
+.card i {
+  font-size: 48px; /* Tamaño grande para destacar */
+  color: #77B28C; /* Verde suave */
+  margin-bottom: 20px; /* Espacio debajo del ícono */
+}
+
+/* ===== Botón personalizado ===== */
+.btn-natura {
+  background-color: #A6B8A1; /* Verde pastel */
+  color: white; /* Texto blanco */
+  padding: 10px 25px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  font-weight: 600; /* Negrita */
+  text-decoration: none; /* Quita subrayado si es <a> */
+}
+
+/* Hover del botón */
+.btn-natura:hover {
+  background-color: #8CA893; /* Verde más oscuro al pasar el mouse */
+}
