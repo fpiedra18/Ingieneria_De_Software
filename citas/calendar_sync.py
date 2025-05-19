@@ -5,50 +5,49 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
 # -----------------------------------------------------------------------------
-# Funciones para sincronizar con Google Calendar
+# Módulo de sincronización con Google Calendar
+# Contiene funciones para crear y eliminar eventos automáticamente
+# utilizando las credenciales autorizadas del usuario.
 # -----------------------------------------------------------------------------
 
 def crear_evento_en_calendar(nombre, tratamiento, fecha, hora, contacto, especialista):
     """
-    Crea un evento en el calendario de Google con la información de la cita.
+    Crea un evento en Google Calendar con los detalles de una cita agendada.
 
     Parámetros:
-    - nombre (str): Nombre del cliente.
-    - tratamiento (str): Nombre del tratamiento reservado.
-    - fecha (date): Fecha de la cita.
-    - hora (time): Hora de inicio de la cita.
-    - contacto (str): Número de WhatsApp o contacto.
-    - especialista (str): Nombre del especialista asignado.
+        nombre (str): Nombre del cliente.
+        tratamiento (str): Nombre del tratamiento reservado.
+        fecha (datetime.date): Fecha programada para la cita.
+        hora (datetime.time): Hora de inicio de la cita.
+        contacto (str): Número de contacto del cliente.
+        especialista (str): Nombre del especialista asignado.
 
     Retorna:
-    - id del evento en Google Calendar (str) o None si ocurre un error.
+        str | None: ID del evento creado en Google Calendar o None si falla.
     """
-    # Permisos requeridos para acceder y modificar el calendario
-    SCOPES = ['https://www.googleapis.com/auth/calendar']
+    SCOPES = ['https://www.googleapis.com/auth/calendar']  # Permisos requeridos
 
-    # Validación: asegura que todos los datos estén presentes
+    # Verifica que todos los parámetros requeridos estén presentes
     if not all([nombre, tratamiento, fecha, hora, contacto, especialista]):
         print("❌ Faltan datos necesarios para crear el evento en Calendar.")
         return None
 
     creds = None
-    token_path = os.path.join('credentials', 'token.json')
+    token_path = os.path.join('credentials', 'token.json')  # Ruta al token de acceso
 
-    # Cargar credenciales desde archivo si existe
+    # Intenta cargar las credenciales desde el archivo token.json
     if os.path.exists(token_path):
         creds = Credentials.from_authorized_user_file(token_path, SCOPES)
 
-    # Crear servicio de conexión con Google Calendar API
+    # Se construye el cliente para acceder a la API de Google Calendar
     service = build('calendar', 'v3', credentials=creds)
 
-    # Determinar hora de inicio y hora de fin del evento
+    # Define hora de inicio y fin del evento
     hora_inicio = datetime.datetime.combine(fecha, hora)
-
-    # Duración del tratamiento en minutos (si está definido)
     duracion = getattr(tratamiento, 'intervalo_minutos', 60) if hasattr(tratamiento, 'intervalo_minutos') else 60
     hora_fin = hora_inicio + datetime.timedelta(minutes=duracion)
 
-    # Crear descripción detallada del evento
+    # Cuerpo del evento con formato y detalles
     descripcion = (
         f"📆 Fecha: {fecha.strftime('%d/%m/%Y')}\n"
         f"🕒 Hora: {hora.strftime('%H:%M')}\n"
@@ -71,7 +70,7 @@ def crear_evento_en_calendar(nombre, tratamiento, fecha, hora, contacto, especia
             'timeZone': 'America/Costa_Rica',
         },
         'location': 'Clínica Natura, Grecia, Costa Rica',
-        'colorId': None,  # Opcional: puede usarse para codificar colores por tratamiento o especialista
+        'colorId': None,  # Puede asignarse un color si se desea
     }
 
     # Intenta insertar el evento en el calendario
@@ -86,23 +85,26 @@ def crear_evento_en_calendar(nombre, tratamiento, fecha, hora, contacto, especia
 
 def eliminar_evento_de_calendar(event_id):
     """
-    Elimina un evento existente de Google Calendar por su ID.
+    Elimina un evento de Google Calendar utilizando su ID.
 
     Parámetros:
-    - event_id (str): ID del evento a eliminar.
+        event_id (str): ID único del evento a eliminar.
+
+    Retorna:
+        None
     """
     SCOPES = ['https://www.googleapis.com/auth/calendar']
     creds = None
     token_path = os.path.join('credentials', 'token.json')
 
-    # Carga de credenciales desde archivo
+    # Carga credenciales desde el archivo
     if os.path.exists(token_path):
         creds = Credentials.from_authorized_user_file(token_path, SCOPES)
 
-    # Construye el servicio para usar la API
+    # Construye el servicio de calendar
     service = build('calendar', 'v3', credentials=creds)
 
-    # Intenta eliminar el evento del calendario
+    # Intenta eliminar el evento
     try:
         service.events().delete(calendarId='primary', eventId=event_id).execute()
         print("✅ Evento eliminado correctamente de Google Calendar.")

@@ -1,0 +1,160 @@
+/* ===== Tratamientos ===== */
+#tratamientos { 
+  background-color: #fff6ed;
+  padding-top: 50px; /* Se ajusta el espacio superior */
+}
+
+.titulo-tratamientos {
+  color: #5e5e5e;
+  font-weight: 700;
+  font-size: 2.8rem;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.titulo-tratamientos .subrayado-dinamico {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35%;
+  height: 6px;
+  background: linear-gradient(to right, #5dc1b9, #8ca893);
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  animation: crecerLinea 4s ease forwards;
+}
+
+@keyframes crecerLinea {
+  to {
+    width: 70%;
+  }
+}
+
+/* Contenedor del slider */
+.tratamientos-swiper {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Contenedor de las flechas para alinearlas con el extremo */
+.swiper-wrapper-externo {
+  position: relative;
+  display: flex;
+  justify-content: center; /* Centra el contenido */
+  align-items: center;
+  width: 100%;
+  padding: 0 50px; /* Asegura que las flechas estén en los extremos */
+}
+
+/* Ajustes de las flechas */
+.swiper-button-next,
+.swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent; /* Elimino el fondo blanco */
+  border: 2px solid #8f8a8aac; /* Rectángulo con borde */
+  padding: 23px 18px;
+  border-radius: 5px; /* Bordes ligeramente redondeados */
+  font-size: 20px;
+  color: #5dc1b9;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #5dc1b9;
+  color: #fff;
+  transform: scale(1.1); /* Aumenta el tamaño al pasar el mouse */
+}
+
+.swiper-button-next {
+  right: 20px; /* Muevo la flecha derecha un poco más hacia la derecha */
+}
+
+.swiper-button-prev {
+  left: 20px; /* Muevo la flecha izquierda un poco más hacia la izquierda */
+}
+
+/* Ajustes del slider */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  width: auto;
+  transition: transform 0.5s ease;
+  transform: scale(0.95); /* por defecto, un poco más pequeño */
+  opacity: 0.8;
+}
+
+/* Slide activo resaltado */
+.swiper-slide-active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Ajuste de las cartas */
+.tratamiento-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  max-height: 450px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tratamiento-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px #fff6ed;
+}
+
+.tratamiento-img {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.tratamiento-card .card-body {
+  padding: 20px;
+}
+
+/* Botón consultar */
+.btn-consultar {
+  background-color: transparent;
+  border: 2px solid #5dc1b9;
+  color: #5dc1b9;
+  font-weight: 600;
+  padding: 6px 20px;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-consultar:hover {
+  background-color: #5dc1b9;
+  color: #fff6ed;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .swiper-slide {
+    width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .swiper-slide {
+    width: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .swiper-slide {
+    width: auto;
+  }
+}
