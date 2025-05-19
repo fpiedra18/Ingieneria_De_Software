@@ -383,8 +383,6 @@ def guardar_cita_protegida(request):
             messages.error(request, 'Error al guardar la cita.')
             return redirect('agendar_protegido')
 
-
-
         
 def dias_disponibles(request):
     tratamiento_id = request.GET.get('tratamiento_id')
@@ -407,4 +405,3 @@ def dias_disponibles(request):
             dias_disponibles.append(fecha.strftime('%Y-%m-%d'))
 
     return JsonResponse({'dias': dias_disponibles})
-
