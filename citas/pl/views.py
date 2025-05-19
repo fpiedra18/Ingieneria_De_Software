@@ -1,6 +1,6 @@
 
 from django.http import JsonResponse
-from .models import Tratamiento, Cita, HorarioAtencion, BloqueoHorario, Especialista
+from ..models import Tratamiento, Cita, HorarioAtencion, BloqueoHorario, Especialista
 from django.contrib import messages
 from datetime import datetime, timedelta, date, time
 from django.utils import timezone
@@ -122,7 +122,7 @@ def obtener_horarios_disponibles(request):
 
 
 def guardar_cita_protegida(request):
-    from .calendar_sync import crear_evento_en_calendar
+    from ..calendar_sync import crear_evento_en_calendar
 
     if request.method == 'POST':
         nombre = request.POST.get('nombre', '').strip()
