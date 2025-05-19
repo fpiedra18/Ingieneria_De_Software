@@ -23,28 +23,32 @@ def crear_evento_en_calendar(nombre, tratamiento, fecha, hora, contacto, especia
     Retorna:
     - id del evento en Google Calendar (str) o None si ocurre un error.
     """
-    # Alcances necesarios para Calendar API
+    # Permisos requeridos para acceder y modificar el calendario
     SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-    # Validar datos obligatorios
+    # Validación: asegura que todos los datos estén presentes
     if not all([nombre, tratamiento, fecha, hora, contacto, especialista]):
         print("❌ Faltan datos necesarios para crear el evento en Calendar.")
         return None
 
     creds = None
     token_path = os.path.join('credentials', 'token.json')
+
+    # Cargar credenciales desde archivo si existe
     if os.path.exists(token_path):
         creds = Credentials.from_authorized_user_file(token_path, SCOPES)
 
+    # Crear servicio de conexión con Google Calendar API
     service = build('calendar', 'v3', credentials=creds)
 
-    # Calcular hora de inicio y fin (ajustar duración si es necesario)
+    # Determinar hora de inicio y hora de fin del evento
     hora_inicio = datetime.datetime.combine(fecha, hora)
-    # Podemos usar un bloque por defecto de 60 minutos o extendido si se pasa
+
+    # Duración del tratamiento en minutos (si está definido)
     duracion = getattr(tratamiento, 'intervalo_minutos', 60) if hasattr(tratamiento, 'intervalo_minutos') else 60
     hora_fin = hora_inicio + datetime.timedelta(minutes=duracion)
 
-    # Descripción detallada del evento
+    # Crear descripción detallada del evento
     descripcion = (
         f"📆 Fecha: {fecha.strftime('%d/%m/%Y')}\n"
         f"🕒 Hora: {hora.strftime('%H:%M')}\n"
@@ -54,9 +58,10 @@ def crear_evento_en_calendar(nombre, tratamiento, fecha, hora, contacto, especia
         f"💬 Reservado desde NaturaClick"
     )
 
+    # Estructura del evento a enviar a Google Calendar
     evento = {
-        'summary': f'{tratamiento} | Cliente: {nombre} | {especialista}',
-        'description': descripcion,
+        'summary': f'{tratamiento} | Cliente: {nombre} | {especialista}',  # Título del evento
+        'description': descripcion,  # Descripción completa
         'start': {
             'dateTime': hora_inicio.isoformat(),
             'timeZone': 'America/Costa_Rica',
@@ -66,9 +71,10 @@ def crear_evento_en_calendar(nombre, tratamiento, fecha, hora, contacto, especia
             'timeZone': 'America/Costa_Rica',
         },
         'location': 'Clínica Natura, Grecia, Costa Rica',
-        'colorId': None,  # Se asignará automáticamente o podrá mapearse dinámicamente
+        'colorId': None,  # Opcional: puede usarse para codificar colores por tratamiento o especialista
     }
 
+    # Intenta insertar el evento en el calendario
     try:
         evento_creado = service.events().insert(calendarId='primary', body=evento).execute()
         print(f"✅ Evento creado en Google Calendar: {evento_creado.get('htmlLink')}")
@@ -88,11 +94,15 @@ def eliminar_evento_de_calendar(event_id):
     SCOPES = ['https://www.googleapis.com/auth/calendar']
     creds = None
     token_path = os.path.join('credentials', 'token.json')
+
+    # Carga de credenciales desde archivo
     if os.path.exists(token_path):
         creds = Credentials.from_authorized_user_file(token_path, SCOPES)
 
+    # Construye el servicio para usar la API
     service = build('calendar', 'v3', credentials=creds)
 
+    # Intenta eliminar el evento del calendario
     try:
         service.events().delete(calendarId='primary', eventId=event_id).execute()
         print("✅ Evento eliminado correctamente de Google Calendar.")
