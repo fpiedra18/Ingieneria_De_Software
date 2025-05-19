@@ -1,40 +1,43 @@
-
+/* Estilo general del cuerpo del sitio */
 body {
-    font-family: "Quicksand", sans-serif;
-    scroll-behavior: smooth;
-  }
-  .btn-agendar {
-    background-color: #5dc1b9;
-    color: white;
-    border-radius: 20px;
-    padding: 6px 20px;
-  }
-  .btn-agendar:hover {
-    background-color: #5dc1b9;
-  }
-
-
-
-
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 55px;
-  height: 55px;
-  background-color: rgb(68, 162, 61);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 26px;
-  z-index: 999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+  font-family: "Quicksand", sans-serif;  /* Fuente limpia y moderna */
+  scroll-behavior: smooth;               /* Desplazamiento suave al hacer scroll */
 }
 
+/* Botón de agendar cita */
+.btn-agendar {
+  background-color: #5dc1b9;             /* Color de fondo (verde agua) */
+  color: white;                          /* Texto blanco */
+  border-radius: 20px;                   /* Bordes redondeados tipo pastilla */
+  padding: 6px 20px;                     /* Espaciado interno (arriba/abajo, izquierda/derecha) */
+}
+
+/* Efecto hover (mantiene mismo color, pero puede usarse para sombra o transición) */
+.btn-agendar:hover {
+  background-color: #5dc1b9;
+}
+
+/* Botón flotante de WhatsApp */
+.whatsapp-float {
+position: fixed;                         /* Fijo en pantalla */
+bottom: 20px;                            /* Separado 20px del borde inferior */
+right: 20px;                             /* Separado 20px del borde derecho */
+width: 55px;                             /* Ancho fijo */
+height: 55px;                            /* Alto fijo */
+background-color: rgb(68, 162, 61);      /* Verde típico de WhatsApp */
+color: white;                            /* Icono en blanco */
+border-radius: 50%;                      /* Forma circular */
+display: flex;                           /* Flexbox para centrar contenido */
+justify-content: center;                /* Centrado horizontal */
+align-items: center;                    /* Centrado vertical */
+font-size: 26px;                         /* Tamaño del ícono */
+z-index: 999;                            /* Siempre encima de todo */
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+text-decoration: none;                   /* Quita subrayado si es un <a> */
+transition: background-color 0.3s ease;  /* Transición suave al hacer hover */
+}
+
+/* Efecto hover para el botón flotante de WhatsApp */
 .whatsapp-float:hover {
-  background-color: rgb(86, 156, 69);
+background-color: rgb(86, 156, 69);      /* Color más claro al pasar el mouse */
 }
