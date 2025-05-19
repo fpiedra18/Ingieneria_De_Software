@@ -12,4 +12,6 @@ class CitasConfig(AppConfig):
         name (str): Nombre de la aplicación dentro del proyecto.
     """
     default_auto_field = 'django.db.models.BigAutoField'
+
+    # Nombre de la aplicación (debe coincidir con el nombre del directorio)
     name = 'citas'

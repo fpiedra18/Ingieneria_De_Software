@@ -1,0 +1,83 @@
+/* Estilos base del cuerpo */
+body {
+  background-color: #dedede;                   /* Fondo gris claro */
+  font-family: 'Segoe UI', sans-serif;         /* Fuente limpia y moderna */
+  color: #333;                                 /* Color de texto principal */
+}
+
+/* Estilo de encabezados h2 */
+h2 {
+  font-weight: 700;                            /* Texto en negrita */
+  color: #5dc1b9;                              /* Color primario de la marca */
+}
+
+/* Etiquetas de formulario */
+.form-label {
+  color: #fff6ed;                              /* Color claro para textos sobre fondo oscuro */
+}
+
+/* Campos del formulario: select, inputs y textarea */
+select, input[type="text"], input[type="date"], input[type="tel"], textarea {
+  border-radius: 12px;                         /* Bordes redondeados */
+  border: 1px solid #ccc;                      /* Borde gris claro */
+  padding: 12px;                               /* Espaciado interno */
+  font-size: 1rem;                             /* Tamaño de texto legible */
+}
+
+/* Estilo al enfocar cualquier input/select/textarea */
+select:focus, input:focus, textarea:focus {
+  border-color: #fff6ed;                       /* Borde claro */
+  box-shadow: 0 0 0 2px #DCEAD6;               /* Sombra verde claro */
+  outline: none;                               /* Quita borde azul predeterminado del navegador */
+}
+
+/* Horarios disponibles como opciones clickeables */
+.opcion-hora {
+  cursor: pointer;                             /* Cursor tipo mano */
+  border: 1px solid #ccc;                      /* Borde gris claro */
+  border-radius: 10px;                         /* Bordes redondeados */
+  padding: 12px;                               /* Espaciado interno */
+  margin-bottom: 10px;                         /* Separación entre celdas */
+  transition: background 0.3s ease;            /* Transición suave al hacer hover */
+  background-color: #fff;                      /* Fondo blanco por defecto */
+  text-align: center;                          /* Texto centrado */
+}
+
+/* Efecto hover sobre una opción de horario */
+.opcion-hora:hover {
+  background-color: #f1f1f1;                   /* Fondo gris claro al pasar el mouse */
+}
+
+/* Opción de horario seleccionada */
+.opcion-hora.activo {
+  background-color: #DCEAD6 !important;        /* Fondo verde claro */
+  border-color: #fff6ed !important;            /* Borde más claro */
+  font-weight: bold;                           /* Texto en negrita */
+}
+
+/* Botón principal personalizado */
+.btn-natura {
+  background-color: #5dc1b9;                   
+  color: white;                                
+  font-weight: 600;                            /* Negrita moderada */
+  border-radius: 10px;                         /* Bordes redondeados */
+  padding: 10px 30px;                          /* Espaciado interno (vertical y horizontal) */
+  font-size: 1.1rem;                           /* Tamaño de fuente ligeramente grande */
+  border: none;                                /* Sin borde */
+  transition: background 0.3s ease;            /* Transición suave de color */
+}
+
+/* Efecto hover del botón */
+.btn-natura:hover {
+  background-color: #5dc1b9;                   /* Color constante (se podría cambiar si se desea) */
+}
+
+/* Contenedor del formulario final */
+#formFinal {
+  margin-top: 40px;                            /* Espacio superior para separar del contenido anterior */
+}
+
+/* Estilo general para alertas */
+.alert {
+  border-radius: 10px;                         /* Bordes redondeados para alertas */
+}

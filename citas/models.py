@@ -6,8 +6,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # Define las horas generales de apertura y cierre de la clínica
 # --------------------------------------------------------------------
 class HorarioAtencion(models.Model):
-    hora_inicio = models.TimeField(default='07:00')
-    hora_fin = models.TimeField(default='19:00')
+    hora_inicio = models.TimeField(default='07:00')  # Hora en que inicia la atención
+    hora_fin = models.TimeField(default='19:00')     # Hora en que finaliza la atención
 
     class Meta:
         verbose_name = "Horario de atención"
@@ -57,6 +57,7 @@ class Cita(models.Model):
     def __str__(self):
         return f"{self.nombre_cliente} - {self.tratamiento.nombre} - {self.fecha} {self.hora}"
 
+    # Calcula la hora de finalización estimada de la cita
     def fin_estimado(self):
         """
         Calcula la hora estimada de finalización de la cita
@@ -72,10 +73,10 @@ class Cita(models.Model):
 # Permite bloquear rangos de horario para mantenimiento u otros motivos
 # --------------------------------------------------------------------
 class BloqueoHorario(models.Model):
-    fecha = models.DateField()
-    hora_inicio = models.TimeField()
-    hora_fin = models.TimeField()
-    motivo = models.CharField(max_length=200, blank=True)
+    fecha = models.DateField()           # Día bloqueado
+    hora_inicio = models.TimeField()     # Hora en que inicia el bloqueo
+    hora_fin = models.TimeField()        # Hora en que finaliza el bloqueo
+    motivo = models.CharField(max_length=200, blank=True)  # Razón del bloqueo (opcional)
 
     class Meta:
         verbose_name = "Bloqueo de horario"
@@ -90,8 +91,8 @@ class BloqueoHorario(models.Model):
 # Se vincula con los tratamientos mediante una relación ManyToMany
 # --------------------------------------------------------------------
 class Especialista(models.Model):
-    nombre = models.CharField(max_length=100)
-    especialidades = models.ManyToManyField('Tratamiento', related_name='especialistas', blank=True)
+    nombre = models.CharField(max_length=100)  # Nombre del especialista
+    especialidades = models.ManyToManyField('Tratamiento', related_name='especialistas', blank=True)  # Tratamientos que puede realizar
 
     def __str__(self):
         return self.nombre

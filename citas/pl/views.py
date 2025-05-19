@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404
 import re
 
+# Vista para mostrar la página de inicio con todos los tratamientos
 def inicio(request):
     """
     Vista de la página principal del sitio.
@@ -25,6 +26,7 @@ def inicio(request):
     tratamientos = Tratamiento.objects.all()
     return render(request, 'inicio.html', {'tratamientos': tratamientos})
 
+# Vista para mostrar el detalle de un tratamiento específico
 def detalle_tratamiento(request, tratamiento_id):
     """
     Vista de detalle para un tratamiento específico.
@@ -45,6 +47,7 @@ def detalle_tratamiento(request, tratamiento_id):
     tratamiento = get_object_or_404(Tratamiento, id=tratamiento_id)
     return render(request, 'detalle_tratamiento.html', {'tratamiento': tratamiento})
 
+# Primera versión de la función que obtiene horarios disponibles (más básica)
 def obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha):
     """
     Calcula los horarios disponibles para un tratamiento en una fecha específica.
@@ -77,6 +80,7 @@ def obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha):
         hora_inicio = hora_actual.time()
         hora_fin_estimada = (hora_actual + timedelta(minutes=tratamiento.intervalo_minutos)).time()
 
+        # Verifica si hay bloqueo en ese rango
         bloqueo = BloqueoHorario.objects.filter(
             fecha=fecha,
             hora_inicio__lt=hora_fin_estimada,
@@ -125,6 +129,7 @@ def vista_protegida_agendar(request):
         'fecha_hoy': fecha_hoy
     })
 
+# Devuelve horarios disponibles para un tratamiento y una fecha específica (JSON)
 def obtener_horarios_disponibles(request):
     """
     API que retorna horarios disponibles para un tratamiento y fecha dados.
@@ -248,16 +253,19 @@ def guardar_cita_protegida(request):
     from ..calendar_sync import crear_evento_en_calendar
 
     if request.method == 'POST':
+        # Extrae datos del formulario
         nombre = request.POST.get('nombre', '').strip()
         contacto = request.POST.get('contacto', '').strip()
         tratamiento_nombre = request.POST.get('tratamiento', '').strip()
         fecha_str = request.POST.get('fecha', '').strip()
         hora_str = request.POST.get('hora', '').strip()
 
+        # Validación de campos obligatorios
         if not nombre or not contacto or not tratamiento_nombre or not fecha_str or not hora_str:
             messages.error(request, 'Todos los campos son obligatorios.')
             return redirect('agendar_protegido')
 
+        # Validación de teléfono y nombre usando expresiones regulares
         patron_telefono = re.compile(r'^(?:\d{4}-\d{4}|\d{8})$')
         if not patron_telefono.match(contacto):
             messages.error(request, 'El número de WhatsApp debe tener 8 dígitos (ejemplo: 8888-8888).')
@@ -269,9 +277,9 @@ def guardar_cita_protegida(request):
             return redirect('agendar_protegido')
 
         try:
+            # Verificación de horarios y especialistas
             tratamiento = Tratamiento.objects.get(nombre=tratamiento_nombre)
             especialistas = tratamiento.especialistas.all()
-
             fecha = datetime.strptime(fecha_str, '%Y-%m-%d').date()
             hora = datetime.strptime(hora_str, '%H:%M').time()
 
@@ -310,6 +318,7 @@ def guardar_cita_protegida(request):
                 messages.error(request, 'Ese horario está bloqueado.')
                 return redirect('agendar_protegido')
 
+            # Crea la cita en la base de datos
             nueva_cita = Cita.objects.create(
                 nombre_cliente=nombre,
                 contacto=contacto,
@@ -318,7 +327,6 @@ def guardar_cita_protegida(request):
                 fecha=fecha,
                 hora=hora,
             )
-
             try:
                 event_id = crear_evento_en_calendar(nombre, tratamiento.nombre, fecha, hora, contacto, especialista_asignado.nombre)
                 if event_id:

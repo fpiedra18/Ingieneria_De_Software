@@ -1,47 +1,47 @@
 /* Variables de paleta */
 :root {
-  --color-primary: #5dc1b9;
-  --color-secondary: #48b3a9;
-  --color-dark: #5e5e5e;
-  --color-light: #fff6ed;
-  --color-text: #333;
-  --bg-card: #5e5e5e;
-  --bg-input: #fff;
-  --border-radius: 12px;
-  --transition-fast: 0.3s ease;
+  --color-primary: #5dc1b9;       /* Color principal (verde agua) */
+  --color-secondary: #48b3a9;     /* Color secundario */
+  --color-dark: #5e5e5e;          /* Color oscuro para texto o fondo */
+  --color-light: #fff6ed;         /* Fondo claro general */
+  --color-text: #333;             /* Color base del texto */
+  --bg-card: #5e5e5e;             /* Fondo para tarjetas/containers */
+  --bg-input: #fff;               /* Fondo para campos de texto */
+  --border-radius: 12px;          /* Bordes redondeados estándar */
+  --transition-fast: 0.3s ease;   /* Transición rápida para hover/focus */
 }
 
 /* Reset básico */
 * {
-  box-sizing: border-box;
+  box-sizing: border-box;         /* Incluye padding y border en width/height */
 }
 
-/* Fondo y tipografía */
+/* Estilo general del cuerpo del sitio */
 body {
   margin: 0;
-  background: var(--color-light);
-  font-family: "Segoe UI", sans-serif;
-  color: var(--color-text);
+  background: var(--color-light);        /* Aplica fondo claro */
+  font-family: "Segoe UI", sans-serif;   /* Fuente del sitio */
+  color: var(--color-text);              /* Color de texto principal */
 }
 
-/* Título de la clínica */
+/* Título principal de la clínica */
 .nombre-clinica {
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
   color: var(--color-primary);
   margin-bottom: 2rem;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);  /* Sombra suave */
 }
 
-/* Contenedor principal */
+/* Contenedor principal del formulario */
 .container-agendar {
   max-width: 900px;
   margin: auto;
   background: var(--bg-card);
   padding: 3rem;
   border-radius: var(--border-radius);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);  /* Sombra envolvente */
 }
 
 /* Título del formulario */
@@ -53,7 +53,7 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Labels */
+/* Etiquetas (labels) del formulario */
 .form-label {
   display: block;
   font-weight: 600;
@@ -61,7 +61,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Inputs y selects */
+/* Campos de entrada y select */
 select, input[type="text"] {
   width: 100%;
   padding: 0.75rem;
@@ -72,13 +72,14 @@ select, input[type="text"] {
   transition: border var(--transition-fast), box-shadow var(--transition-fast);
 }
 
+/* Efecto al enfocar un input */
 select:focus, input:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 8px rgba(93, 193, 185, 0.4);
   outline: none;
 }
 
-/* Resumen de selección */
+/* Caja que muestra el resumen de la selección */
 .resumen-box {
   background: var(--bg-input);
   border-left: 5px solid var(--color-primary);
@@ -90,7 +91,7 @@ select:focus, input:focus {
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* Grid de horarios */
+/* Contenedor de horarios disponibles en formato grid */
 #listaHorarios {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -98,7 +99,7 @@ select:focus, input:focus {
   margin-top: 1rem;
 }
 
-/* Celdas de horario */
+/* Tarjetas individuales de horario */
 .opcion-hora {
   background: var(--bg-input);
   border: 2px solid var(--color-primary);
@@ -110,6 +111,7 @@ select:focus, input:focus {
   transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
+/* Estilo al pasar el mouse por encima de una hora */
 .opcion-hora:hover {
   background: var(--color-primary);
   color: var(--color-light);
@@ -117,6 +119,7 @@ select:focus, input:focus {
   box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
+/* Estilo para la hora seleccionada */
 .opcion-hora.activo {
   background: var(--color-secondary);
   color: var(--color-light);
@@ -124,7 +127,7 @@ select:focus, input:focus {
   box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
 
-/* Botón principal */
+/* Botón personalizado principal */
 .btn-natura {
   background: var(--color-primary) !important;
   color: var(--color-light) !important;
@@ -137,47 +140,52 @@ select:focus, input:focus {
   display: inline-block;
 }
 
+/* Efecto hover del botón */
 .btn-natura:hover {
   background: var(--color-secondary) !important;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(93,193,185,0.4);
 }
 
-/* Alertas */
+/* Estilo base para alertas */
 .alert {
   border-radius: var(--border-radius);
   font-weight: 600;
   font-size: 1rem;
 }
 
-/* Calendario */
+/* Contenedor del calendario (flatpickr) */
 #calendarContainer {
   max-width: 360px;
   margin: auto 0;
 }
 
+/* Días del calendario redondeados */
 .flatpickr-day {
   border-radius: 50% !important;
   transition: all var(--transition-fast);
 }
 
+/* Hover en día del calendario */
 .flatpickr-day:hover {
   background: var(--color-primary) !important;
   color: var(--color-light) !important;
   transform: scale(1.15);
 }
 
+/* Día seleccionado en el calendario */
 .flatpickr-day.selected {
   background: var(--color-secondary) !important;
   color: var(--color-light) !important;
 }
 
+/* Día de hoy en el calendario */
 .flatpickr-day.today {
-  background: #6b7e7c !important;  /* gris oscurooo */
+  background: #6b7e7c !important;  /* gris oscuro */
   color: var(--color-light) !important;
 }
 
-/* Responsividad */
+/* Adaptación para pantallas pequeñas (responsive) */
 @media (max-width: 768px) {
   .container-agendar {
     padding: 2rem;

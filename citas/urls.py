@@ -1,3 +1,4 @@
+# Importación de funciones necesarias de Django
 from django.urls import path
 from citas.pl import views  # Se importan las vistas desde la capa de presentación (PL)
 
@@ -7,6 +8,7 @@ from citas.pl import views  # Se importan las vistas desde la capa de presentaci
 # Cada path incluye una ruta, una vista asociada y un nombre para referenciarla.
 # ----------------------------------------------------------------------------------
 
+# Definición de las rutas (URL patterns) de la aplicación
 urlpatterns = [
     # Ruta principal de la app: muestra los tratamientos disponibles
     path('', views.inicio, name='inicio'),

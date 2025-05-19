@@ -1,8 +1,8 @@
-/* General */
+/* ===== Estilos generales ===== */
 body {
-  background-color: #fff6ed;
-  font-family: 'Segoe UI', sans-serif;
-  color: #333;
+  background-color: #fff6ed; /* Fondo claro general */
+  font-family: 'Segoe UI', sans-serif; /* Fuente principal */
+  color: #333; /* Color de texto base */
 }
 
 .container {
@@ -11,7 +11,7 @@ body {
   padding: 30px 20px;
 }
 
-/* Tarjeta principal */
+/* ===== Tarjeta de detalle del tratamiento ===== */
 .card-detalle-tratamiento {
   background-color: #ffffff;
   border-radius: 20px;
@@ -24,11 +24,11 @@ body {
   gap: 30px;
 }
 
-/* Imagen arriba */
+/* Imagen principal del tratamiento */
 .imagen-principal-wrapper {
   width: 100%;
   max-width: 450px;
-  height: 300px; /* Altura fija para todas */
+  height: 300px;
   margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
@@ -43,7 +43,7 @@ body {
   border-radius: 20px;
 }
 
-/* Información abajo */
+/* ===== Contenido informativo debajo de la imagen ===== */
 .info-content {
   display: flex;
   flex-direction: column;
@@ -59,6 +59,7 @@ body {
   text-align: left;
 }
 
+/* Texto con degradado de color */
 .text-gradient {
   background: linear-gradient(to right, #5dc1b9, #3e7f74);
   -webkit-background-clip: text;
@@ -89,7 +90,7 @@ body {
   text-align: justify;
 }
 
-/* Botón */
+/* ===== Botón profesional para agendar ===== */
 .btn-agendar-profesional {
   background-color: #5dc1b9;
   color: #fff6ed;
@@ -110,6 +111,7 @@ body {
   box-shadow: 0 10px 25px rgba(71, 173, 163, 0.5);
 }
 
+/* ===== Sección secundaria (descripción extendida) ===== */
 .titulo-seccion-especial {
   font-size: 1.4rem;
   font-weight: 700;
@@ -133,6 +135,7 @@ body {
   margin-top: 0;
 }
 
+/* Imagen secundaria (más abajo) */
 .imagen-secundaria-wrapper {
   display: flex;
   justify-content: center;
@@ -142,17 +145,17 @@ body {
 .img-secundaria {
   width: 100%;
   max-width: 500px;
-  height: 320px; /* altura fija */
+  height: 320px;
   border-radius: 18px;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease-in-out;
 }
 
 .img-secundaria:hover {
-  transform: scale(1.02);
+  transform: scale(1.02); /* Efecto sutil al pasar el mouse */
 }
 
-/* Responsive */
+/* ===== Diseño responsivo para móviles ===== */
 @media (max-width: 576px) {
   .imagen-principal-wrapper {
     max-width: 100%;

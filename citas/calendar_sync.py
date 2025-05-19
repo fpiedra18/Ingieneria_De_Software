@@ -57,9 +57,10 @@ def crear_evento_en_calendar(nombre, tratamiento, fecha, hora, contacto, especia
         f"💬 Reservado desde NaturaClick"
     )
 
+    # Estructura del evento a enviar a Google Calendar
     evento = {
-        'summary': f'{tratamiento} | Cliente: {nombre} | {especialista}',
-        'description': descripcion,
+        'summary': f'{tratamiento} | Cliente: {nombre} | {especialista}',  # Título del evento
+        'description': descripcion,  # Descripción completa
         'start': {
             'dateTime': hora_inicio.isoformat(),
             'timeZone': 'America/Costa_Rica',
