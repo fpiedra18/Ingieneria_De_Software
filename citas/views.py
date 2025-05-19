@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+
 from django.http import JsonResponse
 from .models import Tratamiento, Cita, HorarioAtencion, BloqueoHorario, Especialista
 from django.contrib import messages
 from datetime import datetime, timedelta, date, time
 from django.utils import timezone
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404
 import re
 
 def inicio(request):
@@ -14,42 +14,8 @@ def inicio(request):
 def detalle_tratamiento(request, tratamiento_id):
     tratamiento = get_object_or_404(Tratamiento, id=tratamiento_id)
     return render(request, 'detalle_tratamiento.html', {'tratamiento': tratamiento})
-def prueba(request):
-    return render(request, 'prueba.html')
 
-def obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha):
-    horarios_disponibles = []
-    try:
-        intervalo = tratamiento.intervalo_minutos
-    except:
-        intervalo = 60  # valor por defecto
 
-    hora_actual = time(7, 0)
-    hora_fin = time(19, 0)
-
-    while hora_actual < hora_fin:
-        conflicto = Cita.objects.filter(
-            fecha=fecha,
-            hora=hora_actual
-        ).exists()
-
-        bloqueo = BloqueoHorario.objects.filter(
-            fecha=fecha,
-            hora_inicio__lte=hora_actual,
-            hora_fin__gt=hora_actual
-        ).exists()
-
-        if not conflicto and not bloqueo:
-            horarios_disponibles.append(hora_actual.strftime('%H:%M'))
-
-        dt = datetime.combine(fecha, hora_actual) + timedelta(minutes=intervalo)
-        hora_actual = dt.time()
-
-    return horarios_disponibles
-
-def inicio(request):
-    tratamientos = Tratamiento.objects.all()
-    return render(request, 'inicio.html', {'tratamientos': tratamientos})
 
 def obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha):
     horarios_disponibles = []
@@ -91,140 +57,6 @@ def obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha):
         hora_actual += timedelta(minutes=tratamiento.intervalo_minutos)
 
     return horarios_disponibles
-
-
-def agendar_cita(request):
-    tratamientos = Tratamiento.objects.all()
-    tratamiento_id = request.GET.get('tratamiento')
-    fecha_str = request.GET.get('fecha')
-    tratamiento_seleccionado = None
-    horas_disponibles = []
-    fecha_seleccionada = date.today()
-
-    if fecha_str:
-        try:
-            fecha_seleccionada = datetime.strptime(fecha_str, '%Y-%m-%d').date()
-        except ValueError:
-            try:
-                fecha_seleccionada = datetime.strptime(fecha_str, '%B %d, %Y').date()
-            except ValueError:
-                fecha_seleccionada = date.today()
-
-    if tratamiento_id:
-        try:
-            tratamiento_seleccionado = Tratamiento.objects.get(id=tratamiento_id)
-            especialistas = tratamiento_seleccionado.especialistas.all()
-            horario = HorarioAtencion.objects.first()
-            if horario:
-                hora_actual = datetime.combine(fecha_seleccionada, horario.hora_inicio)
-                hora_fin = datetime.combine(fecha_seleccionada, horario.hora_fin)
-
-                while hora_actual + timedelta(minutes=tratamiento_seleccionado.intervalo_minutos) <= hora_fin:
-                    hora_inicio = hora_actual.time()
-                    hora_fin_estimada = (hora_actual + timedelta(minutes=tratamiento_seleccionado.intervalo_minutos)).time()
-
-                    especialistas_disponibles = []
-                    for especialista in especialistas:
-                        conflicto = Cita.objects.filter(
-                            fecha=fecha_seleccionada,
-                            hora__lt=hora_fin_estimada,
-                            hora__gte=hora_inicio,
-                            especialista=especialista
-                        ).exists()
-                        if not conflicto:
-                            especialistas_disponibles.append(especialista)
-
-                    bloqueo = BloqueoHorario.objects.filter(
-                        fecha=fecha_seleccionada,
-                        hora_inicio__lt=hora_fin_estimada,
-                        hora_fin__gt=hora_inicio
-                    ).exists()
-
-                    if not bloqueo and especialistas_disponibles:
-                        horas_disponibles.append(hora_inicio.strftime('%H:%M'))
-
-                    hora_actual += timedelta(minutes=tratamiento_seleccionado.intervalo_minutos)
-        except Tratamiento.DoesNotExist:
-            pass
-
-    if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        contacto = request.POST.get('contacto')
-        tratamiento_id = request.POST.get('tratamiento')
-        fecha_str = request.POST.get('fecha')
-        hora_str = request.POST.get('hora')
-        comentarios = request.POST.get('comentarios')
-
-        try:
-            tratamiento = Tratamiento.objects.get(id=tratamiento_id)
-            try:
-                fecha = datetime.strptime(fecha_str, '%Y-%m-%d').date()
-            except ValueError:
-                fecha = datetime.strptime(fecha_str, '%B %d, %Y').date()
-            hora = datetime.strptime(hora_str, '%H:%M').time()
-
-            if fecha < date.today():
-                messages.error(request, 'La fecha no puede ser anterior a hoy.')
-                return redirect('agendar_cita')
-
-            hora_inicio_dt = datetime.combine(fecha, hora)
-            hora_fin_dt = hora_inicio_dt + timedelta(minutes=tratamiento.intervalo_minutos)
-
-            especialistas = tratamiento.especialistas.all()
-            especialista_asignado = None
-
-            for especialista in especialistas:
-                conflicto = Cita.objects.filter(
-                    fecha=fecha,
-                    hora__lt=hora_fin_dt.time(),
-                    hora__gte=hora,
-                    especialista=especialista
-                ).exists()
-                if not conflicto:
-                    especialista_asignado = especialista
-                    break
-
-            if not especialista_asignado:
-                messages.error(request, 'No hay especialistas disponibles para ese horario.')
-                return redirect('agendar_cita')
-
-            bloqueo = BloqueoHorario.objects.filter(
-                fecha=fecha,
-                hora_inicio__lt=hora_fin_dt.time(),
-                hora_fin__gt=hora
-            ).exists()
-
-            if bloqueo:
-                messages.error(request, 'Ese horario está bloqueado.')
-                return redirect('agendar_cita')
-
-            Cita.objects.create(
-                nombre_cliente=nombre,
-                contacto=contacto,
-                tratamiento=tratamiento,
-                especialista=especialista_asignado,
-                fecha=fecha,
-                hora=hora,
-                comentarios=comentarios
-            )
-
-            messages.success(request, '¡Tu cita ha sido agendada exitosamente!')
-            return redirect('agendar_cita')
-
-        except Exception as e:
-            messages.error(request, 'Ocurrió un error al procesar la cita.')
-            return redirect('agendar_cita')
-
-    return render(request, 'agendar.html', {
-        'tratamientos': tratamientos,
-        'horas_disponibles': horas_disponibles,
-        'tratamiento_seleccionado': tratamiento_seleccionado,
-        'fecha_seleccionada': fecha_seleccionada
-    })
-
-
-
-
 
 
 
