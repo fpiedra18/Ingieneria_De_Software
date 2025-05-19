@@ -1,9 +1,6 @@
 from django.urls import path
 from citas.pl import views  # Se importan las vistas desde la capa de presentación (PL)
 
-
-
-
 # ----------------------------------------------------------------------------------
 # Archivo de rutas (urls.py) de la aplicación 'citas'
 # Define las URL que se pueden acceder y qué vista las va a manejar.
