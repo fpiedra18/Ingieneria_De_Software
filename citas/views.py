@@ -1,71 +1,69 @@
+# Importaciones necesarias de Django
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from ..models import Tratamiento, Cita, HorarioAtencion, BloqueoHorario, Especialista
+from .models import Tratamiento, Cita, HorarioAtencion, BloqueoHorario, Especialista
 from django.contrib import messages
 from datetime import datetime, timedelta, date, time
 from django.utils import timezone
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 import re
 
 # Vista para mostrar la página de inicio con todos los tratamientos
 def inicio(request):
-    """
-    Vista de la página principal del sitio.
-
-    Obtiene todos los tratamientos disponibles y los envía al template `inicio.html`.
-
-    Parámetros:
-    -----------
-    request : HttpRequest
-        Solicitud HTTP recibida desde el navegador.
-
-    Retorna:
-    --------
-    HttpResponse
-        Render del template con la lista de tratamientos.
-    """
     tratamientos = Tratamiento.objects.all()
     return render(request, 'inicio.html', {'tratamientos': tratamientos})
 
 # Vista para mostrar el detalle de un tratamiento específico
 def detalle_tratamiento(request, tratamiento_id):
-    """
-    Vista de detalle para un tratamiento específico.
-
-    Muestra toda la información asociada a un tratamiento, identificado por su ID.
-
-    Parámetros:
-    -----------
-    request : HttpRequest
-    tratamiento_id : int
-        Identificador del tratamiento a consultar.
-
-    Retorna:
-    --------
-    HttpResponse
-        Render del template con los datos del tratamiento.
-    """
     tratamiento = get_object_or_404(Tratamiento, id=tratamiento_id)
     return render(request, 'detalle_tratamiento.html', {'tratamiento': tratamiento})
 
+# Vista de prueba (opcional para desarrollo)
+def prueba(request):
+    return render(request, 'prueba.html')
+
 # Primera versión de la función que obtiene horarios disponibles (más básica)
 def obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha):
-    """
-    Calcula los horarios disponibles para un tratamiento en una fecha específica.
+    horarios_disponibles = []
+    try:
+        intervalo = tratamiento.intervalo_minutos
+    except:
+        intervalo = 60  # valor por defecto si no se encuentra el campo
 
-    Verifica disponibilidad de especialistas y bloqueos registrados.
+    hora_actual = time(7, 0)  # hora de inicio fija
+    hora_fin = time(19, 0)    # hora de fin fija
 
-    Parámetros:
-    -----------
-    tratamiento : Tratamiento
-        Instancia del tratamiento seleccionado.
-    fecha : date
-        Día en el que se desea consultar disponibilidad.
+    while hora_actual < hora_fin:
+        # Verifica si ya existe una cita en esa hora
+        conflicto = Cita.objects.filter(
+            fecha=fecha,
+            hora=hora_actual
+        ).exists()
 
-    Retorna:
-    --------
-    list[str]
-        Lista de horarios en formato 'HH:MM' disponibles.
-    """
+        # Verifica si hay un bloqueo de horario en ese rango
+        bloqueo = BloqueoHorario.objects.filter(
+            fecha=fecha,
+            hora_inicio__lte=hora_actual,
+            hora_fin__gt=hora_actual
+        ).exists()
+
+        # Si no hay conflicto ni bloqueo, se agrega la hora como disponible
+        if not conflicto and not bloqueo:
+            horarios_disponibles.append(hora_actual.strftime('%H:%M'))
+
+        # Suma el intervalo de minutos para pasar al siguiente bloque
+        dt = datetime.combine(fecha, hora_actual) + timedelta(minutes=intervalo)
+        hora_actual = dt.time()
+
+    return horarios_disponibles
+
+# Segunda definición de la misma vista 'inicio' (idéntica a la primera, posiblemente duplicada)
+def inicio(request):
+    tratamientos = Tratamiento.objects.all()
+    return render(request, 'inicio.html', {'tratamientos': tratamientos})
+
+# Segunda versión (más completa) para obtener horarios disponibles para un tratamiento
+def obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha):
     horarios_disponibles = []
     especialistas = tratamiento.especialistas.all()
     horario = HorarioAtencion.objects.first()
@@ -107,21 +105,144 @@ def obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha):
 
     return horarios_disponibles
 
+# Vista para agendar una cita (pública)
+def agendar_cita(request):
+    tratamientos = Tratamiento.objects.all()
+    tratamiento_id = request.GET.get('tratamiento')
+    fecha_str = request.GET.get('fecha')
+    tratamiento_seleccionado = None
+    horas_disponibles = []
+    fecha_seleccionada = date.today()
+
+    # Intenta convertir el string de fecha al formato correcto
+    if fecha_str:
+        try:
+            fecha_seleccionada = datetime.strptime(fecha_str, '%Y-%m-%d').date()
+        except ValueError:
+            try:
+                fecha_seleccionada = datetime.strptime(fecha_str, '%B %d, %Y').date()
+            except ValueError:
+                fecha_seleccionada = date.today()
+
+    # Si hay tratamiento seleccionado, se calculan las horas disponibles
+    if tratamiento_id:
+        try:
+            tratamiento_seleccionado = Tratamiento.objects.get(id=tratamiento_id)
+            especialistas = tratamiento_seleccionado.especialistas.all()
+            horario = HorarioAtencion.objects.first()
+            if horario:
+                hora_actual = datetime.combine(fecha_seleccionada, horario.hora_inicio)
+                hora_fin = datetime.combine(fecha_seleccionada, horario.hora_fin)
+
+                while hora_actual + timedelta(minutes=tratamiento_seleccionado.intervalo_minutos) <= hora_fin:
+                    hora_inicio = hora_actual.time()
+                    hora_fin_estimada = (hora_actual + timedelta(minutes=tratamiento_seleccionado.intervalo_minutos)).time()
+
+                    especialistas_disponibles = []
+                    for especialista in especialistas:
+                        conflicto = Cita.objects.filter(
+                            fecha=fecha_seleccionada,
+                            hora__lt=hora_fin_estimada,
+                            hora__gte=hora_inicio,
+                            especialista=especialista
+                        ).exists()
+                        if not conflicto:
+                            especialistas_disponibles.append(especialista)
+
+                    bloqueo = BloqueoHorario.objects.filter(
+                        fecha=fecha_seleccionada,
+                        hora_inicio__lt=hora_fin_estimada,
+                        hora_fin__gt=hora_inicio
+                    ).exists()
+
+                    if not bloqueo and especialistas_disponibles:
+                        horas_disponibles.append(hora_inicio.strftime('%H:%M'))
+
+                    hora_actual += timedelta(minutes=tratamiento_seleccionado.intervalo_minutos)
+        except Tratamiento.DoesNotExist:
+            pass
+
+    # Procesamiento del formulario de cita
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        contacto = request.POST.get('contacto')
+        tratamiento_id = request.POST.get('tratamiento')
+        fecha_str = request.POST.get('fecha')
+        hora_str = request.POST.get('hora')
+        comentarios = request.POST.get('comentarios')
+
+        try:
+            tratamiento = Tratamiento.objects.get(id=tratamiento_id)
+            try:
+                fecha = datetime.strptime(fecha_str, '%Y-%m-%d').date()
+            except ValueError:
+                fecha = datetime.strptime(fecha_str, '%B %d, %Y').date()
+            hora = datetime.strptime(hora_str, '%H:%M').time()
+
+            # Validación de fecha
+            if fecha < date.today():
+                messages.error(request, 'La fecha no puede ser anterior a hoy.')
+                return redirect('agendar_cita')
+
+            # Verifica disponibilidad
+            hora_inicio_dt = datetime.combine(fecha, hora)
+            hora_fin_dt = hora_inicio_dt + timedelta(minutes=tratamiento.intervalo_minutos)
+
+            especialistas = tratamiento.especialistas.all()
+            especialista_asignado = None
+
+            for especialista in especialistas:
+                conflicto = Cita.objects.filter(
+                    fecha=fecha,
+                    hora__lt=hora_fin_dt.time(),
+                    hora__gte=hora,
+                    especialista=especialista
+                ).exists()
+                if not conflicto:
+                    especialista_asignado = especialista
+                    break
+
+            if not especialista_asignado:
+                messages.error(request, 'No hay especialistas disponibles para ese horario.')
+                return redirect('agendar_cita')
+
+            bloqueo = BloqueoHorario.objects.filter(
+                fecha=fecha,
+                hora_inicio__lt=hora_fin_dt.time(),
+                hora_fin__gt=hora
+            ).exists()
+
+            if bloqueo:
+                messages.error(request, 'Ese horario está bloqueado.')
+                return redirect('agendar_cita')
+
+            # Crea la cita en la base de datos
+            Cita.objects.create(
+                nombre_cliente=nombre,
+                contacto=contacto,
+                tratamiento=tratamiento,
+                especialista=especialista_asignado,
+                fecha=fecha,
+                hora=hora,
+                comentarios=comentarios
+            )
+
+            messages.success(request, '¡Tu cita ha sido agendada exitosamente!')
+            return redirect('agendar_cita')
+
+        except Exception as e:
+            messages.error(request, 'Ocurrió un error al procesar la cita.')
+            return redirect('agendar_cita')
+
+    return render(request, 'agendar.html', {
+        'tratamientos': tratamientos,
+        'horas_disponibles': horas_disponibles,
+        'tratamiento_seleccionado': tratamiento_seleccionado,
+        'fecha_seleccionada': fecha_seleccionada
+    })
+
+# Vista protegida para agendar (con link oculto)
 def vista_protegida_agendar(request):
-    """
-    Vista de agendamiento protegida.
-
-    Muestra el formulario para agendar una cita y la fecha actual.
-
-    Parámetros:
-    -----------
-    request : HttpRequest
-
-    Retorna:
-    --------
-    HttpResponse
-        Render del template `agendar_protegido.html` con tratamientos y fecha actual.
-    """
     tratamientos = Tratamiento.objects.all()
     fecha_hoy = timezone.now().date().strftime('%Y-%m-%d')
     return render(request, 'agendar_protegido.html', {
@@ -131,21 +252,6 @@ def vista_protegida_agendar(request):
 
 # Devuelve horarios disponibles para un tratamiento y una fecha específica (JSON)
 def obtener_horarios_disponibles(request):
-    """
-    API que retorna horarios disponibles para un tratamiento y fecha dados.
-
-    Utilizada por el frontend mediante AJAX para llenar dinámicamente opciones.
-
-    Parámetros:
-    -----------
-    request : HttpRequest
-        Con parámetros GET: 'tratamiento_id' y 'fecha'.
-
-    Retorna:
-    --------
-    JsonResponse
-        Diccionario con la lista de horarios disponibles.
-    """
     tratamiento_id = request.GET.get('tratamiento_id')
     fecha_str = request.GET.get('fecha')
 
@@ -196,61 +302,9 @@ def obtener_horarios_disponibles(request):
     except Exception:
         return JsonResponse({'horarios': []})
 
-def dias_disponibles(request):
-    """
-    API que retorna una lista de días con horarios disponibles para un tratamiento.
-
-    Se usa para limitar los días habilitados en el calendario del frontend.
-
-    Parámetros:
-    -----------
-    request : HttpRequest
-        Con parámetro GET 'tratamiento_id'.
-
-    Retorna:
-    --------
-    JsonResponse
-        Diccionario con la lista de fechas (YYYY-MM-DD) disponibles.
-    """
-    tratamiento_id = request.GET.get('tratamiento_id')
-    if not tratamiento_id:
-        return JsonResponse({'dias': []})
-
-    try:
-        tratamiento = Tratamiento.objects.get(id=tratamiento_id)
-    except Tratamiento.DoesNotExist:
-        return JsonResponse({'dias': []})
-
-    dias_disponibles = []
-    hoy = timezone.now().date()
-    rango_dias = 30  # próximos 30 días
-
-    for i in range(rango_dias):
-        fecha = hoy + timedelta(days=i)
-        horarios = obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha)
-        if horarios:
-            dias_disponibles.append(fecha.strftime('%Y-%m-%d'))
-
-    return JsonResponse({'dias': dias_disponibles})
-
+# Guarda la cita desde el formulario protegido y sincroniza con Google Calendar
 def guardar_cita_protegida(request):
-    """
-    Procesa el formulario de agendamiento de citas.
-
-    Valida datos ingresados, verifica disponibilidad de especialistas y bloqueos,
-    y registra la cita en la base de datos. Además, intenta crear un evento en Google Calendar.
-
-    Parámetros:
-    -----------
-    request : HttpRequest
-        Solicitud HTTP con método POST y datos del formulario.
-
-    Retorna:
-    --------
-    HttpResponse
-        Redirige a la página de agradecimiento si es exitosa o muestra errores si falla.
-    """
-    from ..calendar_sync import crear_evento_en_calendar
+    from .calendar_sync import crear_evento_en_calendar
 
     if request.method == 'POST':
         # Extrae datos del formulario
@@ -327,6 +381,8 @@ def guardar_cita_protegida(request):
                 fecha=fecha,
                 hora=hora,
             )
+            
+            # Intenta crear el evento en Google Calendar
             try:
                 event_id = crear_evento_en_calendar(nombre, tratamiento.nombre, fecha, hora, contacto, especialista_asignado.nombre)
                 if event_id:
@@ -345,3 +401,26 @@ def guardar_cita_protegida(request):
             print("🛑 Error inesperado al guardar cita:", e)
             messages.error(request, 'Error al guardar la cita.')
             return redirect('agendar_protegido')
+
+# Devuelve los días que tienen al menos un horario disponible para un tratamiento dado
+def dias_disponibles(request):
+    tratamiento_id = request.GET.get('tratamiento_id')
+    if not tratamiento_id:
+        return JsonResponse({'dias': []})
+
+    try:
+        tratamiento = Tratamiento.objects.get(id=tratamiento_id)
+    except Tratamiento.DoesNotExist:
+        return JsonResponse({'dias': []})
+
+    dias_disponibles = []
+    hoy = timezone.now().date()
+    rango_dias = 30  # Rango de días a revisar
+
+    for i in range(rango_dias):
+        fecha = hoy + timedelta(days=i)
+        horarios = obtener_horarios_disponibles_para_tratamiento(tratamiento, fecha)
+        if horarios:
+            dias_disponibles.append(fecha.strftime('%Y-%m-%d'))
+
+    return JsonResponse({'dias': dias_disponibles})

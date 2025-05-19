@@ -1,31 +1,30 @@
 # Importación de funciones necesarias de Django
 from django.urls import path
-from citas.pl import views  # Se importan las vistas desde la capa de presentación (PL)
-
-# ----------------------------------------------------------------------------------
-# Archivo de rutas (urls.py) de la aplicación 'citas'
-# Define las URL que se pueden acceder y qué vista las va a manejar.
-# Cada path incluye una ruta, una vista asociada y un nombre para referenciarla.
-# ----------------------------------------------------------------------------------
+from . import views  # Importa las vistas del archivo views.py de la misma app
 
 # Definición de las rutas (URL patterns) de la aplicación
 urlpatterns = [
-    # Ruta principal de la app: muestra los tratamientos disponibles
+    # Ruta raíz (inicio del sitio)
     path('', views.inicio, name='inicio'),
 
-    # Ruta protegida para agendar una cita (solo accesible por link directo o validación previa)
+    # Página para agendar una cita desde la vista pública
+    path('agendar/', views.agendar_cita, name='agendar_cita'),
+
+    # Página para agendar desde la vista protegida (acceso restringido o con link privado)
     path('agendar-protegido/', views.vista_protegida_agendar, name='agendar_protegido'),
 
-    # Endpoint API: devuelve los horarios disponibles para un tratamiento y fecha dados
+    # Endpoint API para obtener horarios disponibles por tratamiento y fecha
     path('api/horarios/', views.obtener_horarios_disponibles, name='obtener_horarios'),
 
-    # Ruta que procesa y guarda una nueva cita en el sistema
+    # Ruta para guardar una cita desde el formulario protegido
     path('guardar-cita/', views.guardar_cita_protegida, name='guardar_cita'),
 
-    # Endpoint API: devuelve los días disponibles para un tratamiento durante los próximos 30 días
+    # Endpoint API para obtener días disponibles en un mes
     path('api/dias-disponibles/', views.dias_disponibles, name='dias_disponibles'),
 
-    # Ruta para ver los detalles de un tratamiento específico, según su ID
+    # Ruta de prueba (puede usarse para testear componentes visuales o scripts)
+    path('prueba/', views.prueba, name='prueba'),
+
+    # Vista de detalle de un tratamiento específico, recibe ID por URL
     path('tratamiento/<int:tratamiento_id>/', views.detalle_tratamiento, name='detalle_tratamiento'),
 ]
-

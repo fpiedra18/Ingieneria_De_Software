@@ -2,12 +2,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
-<<<<<<< HEAD
-from citas.pl.views import inicio
-
-=======
 from citas.views import inicio  # Opcional si se usa directamente alguna vista desde aquí
->>>>>>> origin/main
 
 # Lista de rutas principales del proyecto
 urlpatterns = [

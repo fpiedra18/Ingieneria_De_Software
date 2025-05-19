@@ -1,16 +1,8 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/hero.css' %}" />
 
-<section 
+<section
   class="hero-natura d-flex align-items-center text-white"
-  style="
-    min-height: 50vh;
-    padding-top: 80px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{% static "img/imagen2.png" %}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  "
+  style="min-height: 50vh; padding-top: 80px"
 >
   <div class="container text-center">
     <h1 class="titulo-hero mb-3">
@@ -19,8 +11,22 @@
     <p class="lead mb-4">
       Bienestar, belleza y tecnología natural a tu alcance.
     </p>
-    <a href="#tratamientos" class="btn btn-natura-hero btn-lg">
-      Ver Tratamientos
-    </a>
+    <a href="#tratamientos" class="btn btn-natura-hero btn-lg">Ver Tratamientos</a>
   </div>
 </section>
+
+<style>
+  .hero-natura {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+      url("{% static 'img/imagen2.png' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  @media (max-width: 768px) {
+    .hero-natura {
+      background-position: center top;
+    }
+  }
+</style>

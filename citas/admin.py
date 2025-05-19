@@ -1,12 +1,8 @@
 from django.contrib import admin
 from .models import Tratamiento, Cita, HorarioAtencion, BloqueoHorario, Especialista
 from .calendar_sync import eliminar_evento_de_calendar
-from .models import Especialista
 
-# ----------------------------------------------------------------------------------
-# Configuración del administrador de Django para modelos personalizados del sistema
-# ----------------------------------------------------------------------------------
- 
+# Configuración del panel de administración para el modelo Tratamiento
 @admin.register(Tratamiento)
 class TratamientoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'intervalo_minutos', 'precio')  # Columnas visibles en la lista

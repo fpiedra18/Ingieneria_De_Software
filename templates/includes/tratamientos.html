@@ -1,94 +1,98 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Tratamientos</title>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+/>
+<link rel="stylesheet" href="{% static 'css/clases.css' %}" />
 
-    <!-- Swiper CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
-    />
+<section id="tratamientos" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="titulo-tratamientos position-relative d-inline-block">
+        Nuestros Tratamientos
+        <span class="subrayado-dinamico"></span>
+      </h2>
+    </div>
 
-    <link rel="stylesheet" href="{% static 'css/tratamientos.css' %}" />
-  </head>
-  <body>
-    <section id="tratamientos" class="py-5">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="titulo-tratamientos position-relative d-inline-block">
-            Nuestros Tratamientos
-            <span class="subrayado-dinamico"></span>
-          </h2>
-        </div>
-
-        <!-- Swiper + Flechas dentro del contenedor alineador -->
-        <div class="swiper-wrapper-externo">
-          <div class="swiper tratamientos-swiper">
-            <div class="swiper-wrapper">
-              {% for tratamiento in tratamientos %}
-              <div class="swiper-slide">
-                <a
-                  href="{% url 'detalle_tratamiento' tratamiento.id %}"
-                  class="text-decoration-none text-dark"
-                >
-                  <div
-                    class="card h-100 shadow border-0 rounded-4 tratamiento-card"
-                  >
-                    {% if tratamiento.imagen %}
-                    <img
-                      src="{{ tratamiento.imagen.url }}"
-                      class="card-img-top rounded-top-4 tratamiento-img"
-                      alt="{{ tratamiento.nombre }}"
-                    />
-                    {% else %}
-                    <img
-                      src="{% static 'img/tratamiento-default.jpg' %}"
-                      class="card-img-top rounded-top-4 tratamiento-img"
-                      alt="Tratamiento"
-                    />
-                    {% endif %}
-                    <div
-                      class="card-body d-flex flex-column justify-content-between"
-                    >
-                      <div>
-                        <h5 class="card-title text-center fw-bold text-dark">
-                          {{ tratamiento.nombre }}
-                        </h5>
-                        <p class="card-text text-muted small text-center">
-                          Duración: {{ tratamiento.intervalo_minutos }} minutos
-                        </p>
-                        <p class="card-text text-muted small text-center">
-                          Precio: {{ tratamiento.precio }} CRC
-                        </p>
-                      </div>
-                      <div class="text-center mt-3">
-                        <a
-                          href="https://api.whatsapp.com/send?phone=50661786012&text=Hola%2C%20me%20interesa%20el%20tratamiento%20{{ tratamiento.nombre }}"
-                          target="_blank"
-                          class="btn btn-consultar"
-                        >
-                          Consultar
-                        </a>
-                      </div>
-                    </div>
+    <!-- Swiper + Flechas dentro del contenedor alineador -->
+    <div class="swiper-wrapper-externo">
+      <div class="swiper tratamientos-swiper">
+        <div class="swiper-wrapper">
+          {% for tratamiento in tratamientos %}
+          <div class="swiper-slide">
+            <a href="{% url 'detalle_tratamiento' tratamiento.id %}" class="text-decoration-none text-dark">
+              <div class="card h-100 shadow border-0 rounded-4 tratamiento-card">
+                {% if tratamiento.imagen %}
+                <img
+                  src="{{ tratamiento.imagen.url }}"
+                  class="card-img-top rounded-top-4 tratamiento-img"
+                  alt="{{ tratamiento.nombre }}"
+                />
+                {% else %}
+                <img
+                  src="{% static 'img/tratamiento-default.jpg' %}"
+                  class="card-img-top rounded-top-4 tratamiento-img"
+                  alt="Tratamiento"
+                />
+                {% endif %}
+                <div class="card-body d-flex flex-column justify-content-between">
+                  <div>
+                    <h5 class="card-title text-center fw-bold text-dark">
+                      {{ tratamiento.nombre }}
+                    </h5>
+                    <p class="card-text text-muted small text-center">
+                      Duración: {{ tratamiento.intervalo_minutos }} minutos
+                    </p>
+                    <p class="card-text text-muted small text-center">
+                      Precio: {{ tratamiento.precio }} CRC
+                    </p>
                   </div>
-                </a>
+                  <div class="text-center mt-3">
+                    <a
+                      href="https://api.whatsapp.com/send?phone=50661786012&text=Hola%2C%20me%20interesa%20el%20tratamiento%20{{ tratamiento.nombre }}"
+                      target="_blank"
+                      class="btn btn-consultar"
+                      >Consultar</a
+                    >
+                  </div>
+                </div>
               </div>
-              {% endfor %}
-            </div>
-
-            <!-- Flechas -->
-            <div class="swiper-button-prev custom-swiper-btn"></div>
-            <div class="swiper-button-next custom-swiper-btn"></div>
+            </a>
           </div>
+          {% endfor %}
         </div>
-      </div>
-    </section>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="{% static 'js/tratamientos.js' %}"></script>
-  </body>
-</html>
+        <!-- Flechas alineadas al centro del slider -->
+        <div class="swiper-button-prev custom-swiper-btn"></div>
+        <div class="swiper-button-next custom-swiper-btn"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".tratamientos-swiper", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    loop: true,
+    speed: 600, // transiciones suaves
+    autoplay: {
+      delay: 8000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+      },
+      992: {
+        slidesPerView: 3,
+      },
+    },
+  });
+</script>
