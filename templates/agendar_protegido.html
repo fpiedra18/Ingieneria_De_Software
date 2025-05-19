@@ -7,30 +7,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agendar Cita - Clínica Natura</title>
 
-  <!-- Estilos principales -->  
-  <!-- Bootstrap -->
+  <!-- Bootstrap 5 para estilos generales -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  <!-- Flatpickr Calendar -->
+
+  <!-- Flatpickr: calendario interactivo -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  
-  <!-- SweetAlert2 para alertas -->
+
+  <!-- SweetAlert2: alertas modernas -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- Fuente personalizada -->
+  <!-- Fuente Google personalizada -->
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
-  
+
+  <!-- Estilos propios de esta vista -->
   <link rel="stylesheet" href="{% static 'css/agendar_protegido.css' %}">
-  
 </head>
 
 <body>
+  <!-- Fondo decorativo si se usa -->
   <div class="background-overlay"></div>
+
   <div class="container mt-5 mb-5">
+    <!-- Título principal -->
     <div class="nombre-clinica">Clínica Natura</div>
+
     <div class="container-agendar">
       <h2 class="text-center titulo-principal">Agendá tu cita</h2>
 
+      <!-- Mensajes de éxito (si los hay) -->
       {% if messages %}
         {% for message in messages %}
           <div class="alert alert-success text-center fade-in" id="mensajeExito">
@@ -39,6 +43,7 @@
         {% endfor %}
       {% endif %}
 
+      <!-- Selector de tratamiento -->
       <div class="mb-4">
         <label class="form-label">Seleccioná un tratamiento</label>
         <select id="tratamientoSelect" class="form-select">
@@ -49,38 +54,46 @@
         </select>
       </div>
 
+      <!-- Selector de fecha con calendario interactivo -->
       <div class="mb-4">
         <label class="form-label">Seleccioná una fecha</label>
         <div id="calendarContainer" class="mb-2"></div>
         <input type="hidden" id="fechaInput" name="fecha" data-fecha-hoy="{{ fecha_hoy }}">
       </div>
 
+      <!-- Horarios disponibles (se muestra solo si hay horarios) -->
       <div class="mb-4" id="bloqueHorarios" style="display: none">
         <label class="form-label">Horarios disponibles</label>
         <div id="listaHorarios" class="d-flex flex-wrap gap-2"></div>
       </div>
 
+      <!-- Formulario final de confirmación (oculto hasta que se seleccione hora) -->
       <form id="formFinal" method="POST" action="{% url 'guardar_cita' %}" style="display: none">
         {% csrf_token %}
 
+        <!-- Resumen de selección -->
         <div class="resumen-box">
           <span id="resumenSeleccion"></span>
         </div>
 
+        <!-- Nombre del cliente -->
         <div class="mb-3">
           <label class="form-label">Nombre completo</label>
           <input type="text" name="nombre" class="form-control" placeholder="Ej: Ana María" required>
         </div>
 
+        <!-- Contacto (WhatsApp) -->
         <div class="mb-3">
           <label class="form-label">Número de WhatsApp</label>
           <input type="text" name="contacto" id="inputContacto" class="form-control" placeholder="8888-8888" required>
         </div>
 
+        <!-- Inputs ocultos que se completan automáticamente -->
         <input type="hidden" name="tratamiento" id="inputTratamiento">
         <input type="hidden" name="fecha" id="inputFecha">
         <input type="hidden" name="hora" id="inputHora">
 
+        <!-- Botón de enviar -->
         <div class="text-center">
           <button type="submit" class="btn btn-natura">Reservar ahora</button>
         </div>
@@ -88,7 +101,7 @@
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Scripts: calendario + lógica personalizada -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="{% static 'js/agendar_protegido.js' %}"></script>
 </body>
