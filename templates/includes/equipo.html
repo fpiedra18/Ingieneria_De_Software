@@ -1,15 +1,27 @@
 {% load static %}
-<!-- dentro del <head> de tu HTML -->
+<!-- Carga la etiqueta {% static %} para servir archivos estáticos -->
+
+<!-- Dentro del <head> de tu HTML debes incluir este link:
 <link rel="stylesheet" href="{% static 'css/equipo.css' %}" />
+-->
 
 <section id="nuestro-equipo" class="pt-5">
+  <!-- Sección principal “Nuestro Equipo” con padding superior -->
+
   <div class="container">
-    <!-- Título de "Nuestro Equipo" -->
+    <!-- Contenedor centrado de Bootstrap para limitar el ancho -->
+
+    <!-- Bloque de título y descripción -->
     <div class="text-center mb-5">
+      <!-- Centra el contenido y añade margen inferior -->
+
       <h2 class="titulo-equipo position-relative d-inline-block">
         Nuestro Equipo
       </h2>
+      <!-- Título estilizado con pseudo-elementos para subrayado dinámico -->
+
       <p class="descripcion-equipo">
+        <!-- Párrafo de descripción con ancho máximo y line-height legible -->
         Somos Clínica Natura, un espacio dedicado a tu bienestar y belleza.
         Ofrecemos una amplia gama de tratamientos estéticos y de cuidado
         personal, utilizando las últimas tecnologías y productos de alta
@@ -19,17 +31,26 @@
       </p>
     </div>
 
-    <!-- Imágenes del equipo -->
+    <!-- Fila de miembros del equipo -->
     <div class="row">
+      <!-- Usamos filas de Bootstrap para distribuir columnas iguales -->
+
+      <!-- Miembro 1 -->
       <div class="col-md-3 col-sm-6 mb-4">
+        <!-- 4 columnas en desktop, 2 en tablet y margen inferior -->
         <div class="team-member">
+          <!-- Card de miembro con imagen y overlay de info -->
           <img src="{% static 'img/imagenP1.jpeg' %}" alt="Miembro 1" />
+          <!-- Imagen responsiva con object-fit: cover -->
           <div class="team-info">
+            <!-- Capa oculta que aparece al hover -->
             <h5>Nombre 1</h5>
             <p>Cargo</p>
           </div>
         </div>
       </div>
+
+      <!-- Miembro 2 -->
       <div class="col-md-3 col-sm-6 mb-4">
         <div class="team-member">
           <img src="{% static 'img/imagenP2.jpeg' %}" alt="Miembro 2" />
@@ -39,6 +60,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Miembro 3 -->
       <div class="col-md-3 col-sm-6 mb-4">
         <div class="team-member">
           <img src="{% static 'img/imagenP3.jpeg' %}" alt="Miembro 3" />
@@ -48,6 +71,8 @@
           </div>
         </div>
       </div>
+
+      <!-- Miembro 4 -->
       <div class="col-md-3 col-sm-6 mb-4">
         <div class="team-member">
           <img src="{% static 'img/imagenP4.jpeg' %}" alt="Miembro 4" />
@@ -58,5 +83,8 @@
         </div>
       </div>
     </div>
+    <!-- Fin de la fila de miembros -->
   </div>
+  <!-- Fin del contenedor principal -->
 </section>
+<!-- Fin de la sección Nuestro Equipo -->

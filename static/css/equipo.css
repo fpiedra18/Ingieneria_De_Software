@@ -1,127 +1,144 @@
 /* ===== Nuestro Equipo ===== */
+
+/* Estilo principal del título de la sección "Nuestro Equipo" */
 .titulo-equipo {
-  font-size: 3.8rem;
-  font-weight: 800;
-  text-align: center;
-  color: #5e5e5e;
-  text-transform: capitalize;
-  letter-spacing: 2px;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
+  font-size: 3.8rem;                    /* Tamaño de letra grande para destacar */
+  font-weight: 800;                     /* Negrita extra para énfasis */
+  text-align: center;                   /* Centrado horizontal */
+  color: #5e5e5e;                       /* Color gris oscuro agradable */
+  text-transform: capitalize;           /* Primeras letras en mayúscula */
+  letter-spacing: 2px;                  /* Espacio entre letras */
+  margin-bottom: 20px;                  /* Separación inferior */
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidad */
+  position: relative;                   /* Para posicionar el ::after debajo */
 }
 
+/* Línea decorativa debajo del título */
 .titulo-equipo::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, #5dc1b9, #8ca893);
+  content: '';                          /* Genera un pseudo-elemento vacío */
+  position: absolute;                   /* Posicionamiento relativo al título */
+  bottom: -10px;                        /* Ajuste vertical bajo el texto */
+  left: 50%;                            /* Centrado horizontal */
+  transform: translateX(-50%);          /* Compensa el 50% para centrar exactamente */
+  width: 100%;                          /* Ancho igual al del título */
+  height: 2px;                          /* Grosor de la línea */
+  background: linear-gradient(to right, #5dc1b9, #8ca893); /* Degradado */
 }
 
+/* Descripción de la sección, centrada y con lectura cómoda */
 .descripcion-equipo {
-  font-size: 1.2rem;
-  text-align: center;
-  color: #6c6c6c;
-  max-width: 900px;
-  margin: 0 auto;
-  line-height: 1.8;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
-  margin-bottom: 30px;
+  font-size: 1.2rem;                    /* Tamaño de texto legible */
+  text-align: center;                   /* Centrado */
+  color: #6c6c6c;                       /* Gris medio */
+  max-width: 900px;                     /* Ancho máximo para controlar lectura */
+  margin: 0 auto;                       /* Centrado horizontal automático */
+  line-height: 1.8;                     /* Altura de línea para espaciado */
+  padding: 20px;                        /* Espacio interno alrededor */
+  font-family: 'Arial', sans-serif;     /* Fuente sans-serif limpia */
+  margin-bottom: 30px;                  /* Separación inferior */
 }
 
+/* Contenedor de cada miembro del equipo, con efecto hover envolvente */
 .team-member {
-  position: relative;
-  overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  margin: 0 auto;
-  height: 300px;
-  width: 300px;
-  margin-bottom: 30px;
+  position: relative;                   /* Para contenido absoluto dentro */
+  overflow: hidden;                     /* Oculta desbordes en hover */
+  border-radius: 15px;                  /* Bordes redondeados */
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3); /* Sombra para elevar la tarjeta */
+  transition: all 0.3s ease;            /* Transición suave en hover */
+  margin: 0 auto;                       /* Centrado horizontal */
+  height: 300px;                        /* Altura fija */
+  width: 300px;                         /* Ancho fijo */
+  margin-bottom: 30px;                  /* Espacio abajo entre tarjetas */
 }
 
+/* Imagen del miembro: ocupa todo el contenedor y con efecto zoom */
 .team-member img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-  transition: transform 0.3s ease;
+  width: 100%;                          /* Ancho completo del contenedor */
+  height: 100%;                         /* Altura completa */
+  object-fit: cover;                    /* Recorta proporción para cubrir */
+  border-radius: 15px;                  /* Coincide con el contenedor */
+  transition: transform 0.3s ease;      /* Transición para el hover */
 }
 
+/* Zoom de la imagen al pasar el ratón */
 .team-member img:hover {
-  transform: scale(1.1);
+  transform: scale(1.1);                /* Aumenta un 10% */
 }
 
+/* Información del miembro, oculta hasta hover */
 .team-info {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 10px;
-  width: 100%;
-  text-align: center;
-  border-radius: 8px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  position: absolute;                   /* Sobre la imagen */
+  bottom: 10px;                         /* Ligero margen inferior */
+  left: 50%;                            /* Centrado horizontal */
+  transform: translateX(-50%);          /* Ajuste de centrado exacto */
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente oscuro */
+  color: #fff;                          /* Texto blanco */
+  padding: 10px;                        /* Espacio interno */
+  width: 100%;                          /* Ancho igual a la tarjeta */
+  text-align: center;                   /* Centrado de texto */
+  border-radius: 8px;                   /* Bordes ligeramente redondeados */
+  opacity: 0;                           /* Invisible por defecto */
+  transition: opacity 0.3s ease;        /* Transición suave al mostrar */
 }
 
+/* Muestra la info al hacer hover sobre el miembro */
 .team-member:hover .team-info {
-  opacity: 1;
+  opacity: 1;                           /* Visible */
 }
 
+/* Estilo del título dentro de la info del miembro */
 .team-info h5 {
-  font-weight: 600;
-  font-size: 1.2rem;
-  margin: 0;
+  font-weight: 600;                     /* Semi-negrita */
+  font-size: 1.2rem;                    /* Tamaño legible */
+  margin: 0;                            /* Sin margen extra */
 }
 
+/* Texto adicional (cargo, especialidad) */
 .team-info p {
-  font-size: 1rem;
-  font-weight: 300;
-  margin: 0;
+  font-size: 1rem;                      /* Tamaño estándar */
+  font-weight: 300;                     /* Ligero */
+  margin: 0;                            /* Sin margen extra */
 }
 
+/* Fondo y espaciados de la sección completa */
 #nuestro-equipo {
-  background-color: #f8f9fa;
-  padding-top: 50px;
-  padding-bottom: 0;
-  margin-bottom: 0;
+  background-color: #f8f9fa;            /* Gris muy claro de fondo */
+  padding-top: 50px;                    /* Espacio arriba */
+  padding-bottom: 0;                    /* Sin espacio abajo adicional */
+  margin-bottom: 0;                     /* Sin margen inferior */
 }
 
+/* Línea decorativa superior de la sección */
 #nuestro-equipo::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 4px;
-  background: #618b81;
-  margin-top: -50px;
-  margin-bottom: 40px;
+  content: '';                          /* Pseudo-elemento vacío */
+  display: block;                       /* Bloque */
+  width: 100%;                          /* Ancho completo */
+  height: 4px;                          /* Altura de la línea */
+  background: #618b81;                  /* Color sólido */
+  margin-top: -50px;                    /* Se superpone arriba */
+  margin-bottom: 40px;                  /* Espacio antes del contenido */
 }
 
+/* Contenedor flexible para filas de miembros */
 .row {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+  display: flex;                        /* Flexbox para alinear tarjetas */
+  justify-content: center;              /* Centrado horizontal de columnas */
+  gap: 30px;                            /* Espacio entre columnas */
 }
 
+/* Ancho base de cada columna */
 .col-md-3 {
-  width: 22%;
+  width: 22%;                           /* Aproximado a 4 columnas en desktop */
 }
 
+/* Ajuste para tablets: 2 columnas */
 @media (max-width: 768px) {
   .col-md-3 {
     width: 45%;
   }
 }
 
+/* Ajuste para móviles: 1 columna */
 @media (max-width: 576px) {
   .col-md-3 {
     width: 100%;

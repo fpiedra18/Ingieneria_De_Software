@@ -1,71 +1,95 @@
 <section id="contacto" class="py-5 bg-light">
+  <!-- Contenedor principal para la sección de contacto, con padding vertical y fondo claro -->
   <div class="container-fluid">
-    <!-- MAPA ancho, moderno -->
+    <!-- Mapa de Google: fila centrada con margen inferior -->
     <div class="row justify-content-center mb-5">
       <div class="col-12 col-md-10">
-        <div>
-          <iframe
-            src="https://maps.google.com/maps?q=10.07366,-84.30956&z=15&output=embed"
-            width="100%"
-            height="450"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          >
-          </iframe>
-        </div>
+        <!-- IFrame responsivo que muestra la ubicación en Google Maps -->
+        <iframe
+          src="https://maps.google.com/maps?q=10.07366,-84.30956&z=15&output=embed"
+          width="100%"
+          <!--
+          Ancho
+          completo
+          del
+          contenedor
+          --
+        >
+          height="450"
+          <!-- Altura fija de 450px -->
+          style="border: 0"
+          <!-- Sin borde alrededor del iframe -->
+          allowfullscreen=""
+          <!-- Permite pantalla completa -->
+          loading="lazy"
+          <!-- Carga diferida para rendimiento -->
+          referrerpolicy="no-referrer-when-downgrade"
+          <!-- Política de referer para seguridad -->
+          ></iframe
+        >
       </div>
     </div>
 
-    <!-- Contacto pro -->
+    <!-- Bloque de información de contacto profesional -->
     <div class="row justify-content-center">
       <div class="col-md-8 text-center">
+        <!-- Título principal de la sección -->
         <h2 class="mb-4">Contáctanos</h2>
 
+        <!-- Lista de métodos de contacto con íconos y espaciado -->
         <div class="d-flex justify-content-center flex-wrap gap-4 fs-5">
-          <!-- Teléfono -->
+          <!-- Enlace telefónico: abre el marcador de llamada -->
           <a
             href="tel:+50661786012"
             class="text-decoration-none text-dark d-flex align-items-center gap-2"
           >
             <i class="bi bi-telephone-fill text-success fs-4"></i>
+            <!-- Ícono de teléfono -->
             <span>+506 6178 6012</span>
+            <!-- Número de contacto -->
           </a>
 
-          <!-- Correo -->
+          <!-- Enlace de correo: abre cliente de email -->
           <a
             href="mailto:info@clinicanatura.com"
             class="text-decoration-none text-dark d-flex align-items-center gap-2"
           >
             <i class="bi bi-envelope-fill text-success fs-4"></i>
+            <!-- Ícono de sobre -->
             <span>info@clinicanatura.com</span>
+            <!-- Dirección de email -->
           </a>
 
-          <!-- Ubicación -->
+          <!-- Información de ubicación: solo texto e ícono -->
           <div class="d-flex align-items-center gap-2 text-dark">
             <i class="bi bi-geo-alt-fill text-success fs-4"></i>
+            <!-- Ícono de ubicación -->
             <span>Grecia, Alajuela, Costa Rica</span>
+            <!-- Dirección física -->
           </div>
 
-          <!-- Instagram -->
+          <!-- Enlace a Instagram: abre perfil en nueva pestaña -->
           <a
             href="https://instagram.com/clinica_naturacr"
             target="_blank"
             class="text-decoration-none text-dark d-flex align-items-center gap-2"
           >
             <i class="bi bi-instagram fs-4 text-success"></i>
+            <!-- Ícono de Instagram -->
             <span>@clinica_naturacr</span>
+            <!-- Usuario de Instagram -->
           </a>
 
-          <!-- WhatsApp -->
+          <!-- Enlace a WhatsApp: abre chat directo -->
           <a
             href="https://api.whatsapp.com/send?phone=50661786012"
             target="_blank"
             class="text-decoration-none text-dark d-flex align-items-center gap-2"
           >
             <i class="bi bi-whatsapp fs-4 text-success"></i>
+            <!-- Ícono de WhatsApp -->
             <span>WhatsApp</span>
+            <!-- Etiqueta de WhatsApp -->
           </a>
         </div>
       </div>

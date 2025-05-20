@@ -1,34 +1,38 @@
-
 /* ===== Header ===== */
+
+/* Color principal del logo de la marca “Natura” */
 .logo-natura {
-  color: #5dc1b9; /* o el color que querés usar */
+  color: #5dc1b9; /* Color agua que refuerza la identidad */
 }
 
-
+/* Estilo del texto de la marca dentro de la barra de navegación */
 .navbar-brand {
-  letter-spacing: 1px;
+  letter-spacing: 1px; /* Espacio ligero entre letras para mejor legibilidad */
 }
 
+/* Enlaces del menú de navegación */
 .nav-link {
-  margin: 0 10px;
-  transition: color 0.3s ease-in-out;
+  margin: 0 10px;                  /* Separación horizontal entre cada enlace */
+  transition: color 0.3s ease-in-out; /* Transición suave al cambiar color */
 }
 
+/* Efecto hover en los enlaces: cambia al color principal */
 .nav-link:hover {
-  color:#5dc1b9 !important;
+  color: #5dc1b9 !important;       /* Fuerza el color agua sobre estilos previos */
 }
 
+/* Botón “Agendar” en el header */
 .btn-agendar {
-  background-color:#5dc1b9;
-  color: #fff6ed;
-  padding: 8px 20px;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s ease-in-out;
+  background-color: #5dc1b9;       /* Fondo con color agua */
+  color: #fff6ed;                  /* Texto crema claro para buen contraste */
+  padding: 8px 20px;               /* Espaciado interno cómodo */
+  font-weight: 600;                /* Texto seminegrita para énfasis */
+  border-radius: 8px;              /* Bordes redondeados para estilo amigable */
+  transition: all 0.3s ease-in-out; /* Transición suave en todos los cambios */
 }
 
+/* Efecto hover sobre el botón “Agendar” */
 .btn-agendar:hover {
-  background-color: #5e5e5e;
-  transform: scale(1.05);
+  background-color: #5e5e5e;       /* Fondo gris oscuro al pasar el ratón */
+  transform: scale(1.05);          /* Ligero agrandamiento para llamar la atención */
 }
-

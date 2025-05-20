@@ -1,158 +1,169 @@
 /* ===== Tratamientos ===== */
-#tratamientos { 
-  background-color: #fff6ed;
-  padding-top: 50px; /* Se ajusta el espacio superior */
+
+/* Fondo y espaciado superior de la sección de tratamientos */
+#tratamientos {
+  background-color: #fff6ed;  /* Fondo crema suave para diferenciar la sección */
+  padding-top: 50px;          /* Espacio arriba para separar del contenido previo */
 }
 
+/* Título principal de la sección */
 .titulo-tratamientos {
-  color: #5e5e5e;
-  font-weight: 700;
-  font-size: 2.8rem;
-  position: relative;
-  display: inline-block;
-  margin-bottom: 20px;
+  color: #5e5e5e;             /* Gris oscuro para buena legibilidad */
+  font-weight: 700;           /* Negrita para destacar */
+  font-size: 2.8rem;          /* Tamaño grande para jerarquía visual */
+  position: relative;         /* Para posicionar el subrayado dinámico */
+  display: inline-block;      /* Ajusta el ancho al contenido */
+  margin-bottom: 20px;        /* Espacio debajo antes de los cards */
 }
 
+/* Línea subrayada animada bajo el título */
 .titulo-tratamientos .subrayado-dinamico {
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 35%;
-  height: 6px;
-  background: linear-gradient(to right, #5dc1b9, #8ca893);
-  border-radius: 50px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  animation: crecerLinea 4s ease forwards;
+  position: absolute;                     /* Se posiciona relativo al título */
+  bottom: -12px;                          /* Ajuste vertical justo debajo del texto */
+  left: 50%;                              /* Centrado horizontal respecto al título */
+  transform: translateX(-50%);            /* Centra exactamente el pseudo-elemento */
+  width: 35%;                             /* Ancho inicial reducido para animar */
+  height: 6px;                            /* Grosor de la línea */
+  background: linear-gradient(to right, #5dc1b9, #8ca893); /* Degradado de color */
+  border-radius: 50px;                    /* Bordes redondeados para suavidad */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra sutil para profundidad */
+  animation: crecerLinea 4s ease forwards;/* Anima el crecimiento del ancho */
 }
 
+/* Keyframes para la animación de crecimiento de la línea */
 @keyframes crecerLinea {
   to {
-    width: 70%;
+    width: 70%;  /* La línea termina al 70% del ancho del título */
   }
 }
 
-/* Contenedor del slider */
+/* Contenedor del slider de tratamientos */
 .tratamientos-swiper {
-  width: 100%;
-  margin-top: 20px;
+  width: 100%;       /* Ocupa todo el ancho disponible */
+  margin-top: 20px;  /* Espacio arriba antes de las tarjetas */
 }
 
-/* Contenedor de las flechas para alinearlas con el extremo */
+/* Wrapper externo para alinear correctamente las flechas */
 .swiper-wrapper-externo {
-  position: relative;
-  display: flex;
-  justify-content: center; /* Centra el contenido */
-  align-items: center;
-  width: 100%;
-  padding: 0 50px; /* Asegura que las flechas estén en los extremos */
+  position: relative;          /* Permite posicionar flechas absolutas */
+  display: flex;               /* Flexbox para centrar contenido */
+  justify-content: center;     /* Centrado horizontal de slides */
+  align-items: center;         /* Centrado vertical de slides */
+  width: 100%;                 /* Ancho completo */
+  padding: 0 50px;             /* Espacio lateral para no empujar flechas */
 }
 
-/* Ajustes de las flechas */
+/* Estilos comunes para las flechas de navegación */
 .swiper-button-next,
 .swiper-button-prev {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: transparent; /* Elimino el fondo blanco */
-  border: 2px solid #8f8a8aac; /* Rectángulo con borde */
-  padding: 23px 18px;
-  border-radius: 5px; /* Bordes ligeramente redondeados */
-  font-size: 20px;
-  color: #5dc1b9;
-  z-index: 10;
-  transition: all 0.3s ease;
+  position: absolute;                    /* Fuera del flujo para apoyarse en wrapper */
+  top: 50%;                              /* Centrado vertical */
+  transform: translateY(-50%);           /* Ajuste fino del centrado */
+  background-color: transparent;         /* Sin fondo para transparencia */
+  border: 2px solid #8f8a8aac;           /* Borde semitransparente para visibilidad */
+  padding: 23px 18px;                    /* Espacio interno generoso */
+  border-radius: 5px;                    /* Bordes ligeramente redondeados */
+  font-size: 20px;                       /* Icono de flecha grande */
+  color: #5dc1b9;                        /* Color primario para consistencia */
+  z-index: 10;                           /* Encima de otros elementos */
+  transition: all 0.3s ease;             /* Transición suave en hover */
 }
 
+/* Efecto hover de las flechas: fondo y escala */
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  background-color: #5dc1b9;
-  color: #fff;
-  transform: scale(1.1); /* Aumenta el tamaño al pasar el mouse */
+  background-color: #5dc1b9; /* Fondo primario */
+  color: #fff;               /* Flecha blanca para contraste */
+  transform: scale(1.1);     /* Aumenta tamaño al pasar el ratón */
 }
 
+/* Posición específica de la flecha derecha */
 .swiper-button-next {
-  right: 20px; /* Muevo la flecha derecha un poco más hacia la derecha */
+  right: 20px;  /* Se separa un poco más del borde derecho */
 }
 
+/* Posición específica de la flecha izquierda */
 .swiper-button-prev {
-  left: 20px; /* Muevo la flecha izquierda un poco más hacia la izquierda */
+  left: 20px;   /* Se separa un poco más del borde izquierdo */
 }
 
-/* Ajustes del slider */
+/* Slides individuales dentro del slider */
 .swiper-slide {
-  display: flex;
-  justify-content: center;
-  flex-shrink: 0;
-  width: auto;
-  transition: transform 0.5s ease;
-  transform: scale(0.95); /* por defecto, un poco más pequeño */
-  opacity: 0.8;
+  display: flex;               /* Flex para centrar contenido interno */
+  justify-content: center;     /* Centrado horizontal del card */
+  flex-shrink: 0;              /* Evita que el slide se encoja */
+  width: auto;                 /* Ancho automático según contenido */
+  transition: transform 0.5s ease; /* Suave al cambiar escala */
+  transform: scale(0.95);      /* Default un poco más pequeño */
+  opacity: 0.8;                /* Menor opacidad para slides inactivos */
 }
 
-/* Slide activo resaltado */
+/* Slide activo resaltado con escala completa y opacidad */
 .swiper-slide-active {
-  transform: scale(1);
-  opacity: 1;
+  transform: scale(1); /* Tamaño original al estar activo */
+  opacity: 1;          /* Totalmente opaco */
 }
 
-/* Ajuste de las cartas */
+/* Card de tratamiento: contenedor y efectos hover */
 .tratamiento-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suaves al interactuar */
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: column;    /* Estructura vertical */
+  justify-content: space-between; /* Separación equilibrada */
   height: 100%;
-  max-height: 450px;
-  width: 100%;
-  box-sizing: border-box;
+  max-height: 450px;         /* Altura máxima controlada */
+  width: 100%;               /* Ancho completo del slide */
+  box-sizing: border-box;    /* Incluye padding en el ancho */
 }
 
+/* Elevación y ligero desplazamiento al pasar el ratón */
 .tratamiento-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px #fff6ed;
+  transform: translateY(-5px);             /* Sube 5px */
+  box-shadow: 0 10px 30px #fff6ed;         /* Sombra crema suave */
 }
 
+/* Imagen del tratamiento dentro de la card */
 .tratamiento-img {
-  height: 250px;
-  object-fit: cover;
-  width: 100%;
+  height: 250px;           /* Altura fija para uniformidad */
+  object-fit: cover;       /* Cubre el contenedor recortando proporción */
+  width: 100%;             /* Ancho completo */
 }
 
+/* Cuerpo del card: padding interno */
 .tratamiento-card .card-body {
-  padding: 20px;
+  padding: 20px;           /* Espacio interno para texto */
 }
 
-/* Botón consultar */
+/* Botón “Consultar” dentro de cada card */
 .btn-consultar {
-  background-color: transparent;
-  border: 2px solid #5dc1b9;
-  color: #5dc1b9;
-  font-weight: 600;
-  padding: 6px 20px;
-  font-size: 0.95rem;
-  border-radius: 50px;
-  transition: all 0.3s ease;
+  background-color: transparent;  /* Sin fondo por defecto */
+  border: 2px solid #5dc1b9;      /* Borde primario */
+  color: #5dc1b9;                 /* Texto primario */
+  font-weight: 600;               /* Semi-negrita */
+  padding: 6px 20px;              /* Espaciado cómodo */
+  font-size: 0.95rem;             /* Tamaño de texto ligeramente menor */
+  border-radius: 50px;            /* Pill button */
+  transition: all 0.3s ease;      /* Transición en hover */
 }
 
+/* Hover del botón “Consultar”: fondo y texto invertido */
 .btn-consultar:hover {
-  background-color: #5dc1b9;
-  color: #fff6ed;
+  background-color: #5dc1b9; /* Fondo primario */
+  color: #fff6ed;           /* Texto crema claro */
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
+/* En pantallas medianas y menores, evita cambiar el width para que el slider fluya */
 @media (max-width: 992px) {
   .swiper-slide {
     width: auto;
   }
 }
-
 @media (max-width: 768px) {
   .swiper-slide {
     width: auto;
   }
 }
-
 @media (max-width: 576px) {
   .swiper-slide {
     width: auto;

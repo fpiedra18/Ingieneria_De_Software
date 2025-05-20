@@ -6,20 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ tratamiento.nombre }} - Detalle</title>
 
-    <!-- Enlace al CSS personalizado de esta vista -->
+    <!-- Enlace al CSS específico para el estilo de detalle de tratamiento -->
     <link rel="stylesheet" href="{% static 'css/detalle_tratamiento.css' %}" />
   </head>
 
   <body>
     <div class="container">
-      <!-- Botón para volver al inicio -->
+      <!-- Botón para regresar a la página de inicio -->
       <a href="/" class="btn btn-outline-secondary mb-4">&larr; Volver</a>
 
-      <!-- Tarjeta principal del detalle del tratamiento -->
+      <!-- Tarjeta contenedora del detalle completo del tratamiento -->
       <div class="card-detalle-tratamiento">
-
         <div class="card-detalle-tratamiento-flex">
-          <!-- Imagen principal del tratamiento (si existe) -->
+          <!-- Wrapper de la imagen principal del tratamiento -->
           {% if tratamiento.imagen %}
           <div class="imagen-principal-wrapper">
             <img
@@ -30,25 +29,36 @@
           </div>
           {% endif %}
 
-          <!-- Información textual del tratamiento -->
+          <!-- Contenedor de la información textual del tratamiento -->
           <div class="info-content">
-            <h2 class="titulo-tratamiento text-gradient">{{ tratamiento.nombre }}</h2>
-            <p><strong>Duración:</strong> {{ tratamiento.intervalo_minutos }} minutos</p>
+            <!-- Título con degradado para destacar el nombre -->
+            <h2 class="titulo-tratamiento text-gradient">
+              {{ tratamiento.nombre }}
+            </h2>
+
+            <!-- Datos clave: duración y precio -->
+            <p>
+              <strong>Duración:</strong> {{ tratamiento.intervalo_minutos }}
+              minutos
+            </p>
             <p><strong>Precio:</strong> {{ tratamiento.precio }} CRC</p>
 
+            <!-- Línea divisoria para separar secciones -->
             <hr class="divider" />
 
-            <!-- Descripción larga del tratamiento -->
+            <!-- Subtítulo de sección -->
             <h4 class="subtitulo">Descripción del tratamiento</h4>
+            <!-- Descripción larga, con soporte para saltos de línea -->
             {% if tratamiento.descripcion_larga %}
-              <p class="text-muted descripcion-detalle">
-                {{ tratamiento.descripcion_larga|linebreaks }}
-              </p>
+            <p class="text-muted descripcion-detalle">
+              {{ tratamiento.descripcion_larga|linebreaks }}
+            </p>
             {% else %}
-              <p class="text-muted">Descripción no disponible</p>
+            <!-- Mensaje alternativo si no hay descripción larga -->
+            <p class="text-muted">Descripción no disponible</p>
             {% endif %}
 
-            <!-- Botón de WhatsApp para agendar -->
+            <!-- Botón de llamada a la acción: agendar vía WhatsApp -->
             <div class="text-center mt-3">
               <a
                 href="https://api.whatsapp.com/send?phone=50661786012&text=Hola%2C%20quiero%20agendar%20el%20tratamiento%20{{ tratamiento.nombre }}"
@@ -61,33 +71,34 @@
           </div>
         </div>
 
-        <!-- Sección secundaria (antes y después, si hay contenido) -->
-        {% if tratamiento.descripcion_secundaria or tratamiento.imagen_secundaria %}
+        <!-- Sección “Antes y Después” que solo se muestra si hay contenido secundario -->
+        {% if tratamiento.descripcion_secundaria or
+        tratamiento.imagen_secundaria %}
         <div class="seccion-secundaria">
+          <!-- Título de la sección secundaria -->
           <h2 class="titulo-seccion-especial">Antes y Después</h2>
 
           <div class="descripcion-secundaria-box">
-            <!-- Texto de la descripción secundaria -->
+            <!-- Texto de la descripción secundaria, con linebreaks -->
             {% if tratamiento.descripcion_secundaria %}
-              <p class="text-muted descripcion-detalle">
-                {{ tratamiento.descripcion_secundaria|linebreaks }}
-              </p>
+            <p class="text-muted descripcion-detalle">
+              {{ tratamiento.descripcion_secundaria|linebreaks }}
+            </p>
             {% endif %}
 
-            <!-- Imagen secundaria si existe -->
+            <!-- Imagen secundaria adicional, si existe -->
             {% if tratamiento.imagen_secundaria %}
-              <div class="imagen-secundaria-wrapper">
-                <img
-                  src="{{ tratamiento.imagen_secundaria.url }}"
-                  alt="Imagen adicional de {{ tratamiento.nombre }}"
-                  class="img-secundaria"
-                />
-              </div>
+            <div class="imagen-secundaria-wrapper">
+              <img
+                src="{{ tratamiento.imagen_secundaria.url }}"
+                alt="Imagen adicional de {{ tratamiento.nombre }}"
+                class="img-secundaria"
+              />
+            </div>
             {% endif %}
           </div>
         </div>
         {% endif %}
-
       </div>
     </div>
   </body>

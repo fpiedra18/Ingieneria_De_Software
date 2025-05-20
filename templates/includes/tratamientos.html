@@ -5,64 +5,79 @@
     <meta charset="UTF-8" />
     <title>Tratamientos</title>
 
-    <!-- Swiper CSS -->
+    <!-- Swiper CSS: estilos necesarios para el slider -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
 
+    <!-- CSS personalizado para la sección de tratamientos -->
     <link rel="stylesheet" href="{% static 'css/tratamientos.css' %}" />
   </head>
   <body>
+    <!-- Sección principal de “Nuestros Tratamientos” -->
     <section id="tratamientos" class="py-5">
       <div class="container">
+        <!-- Título centrado con subrayado animado -->
         <div class="text-center mb-5">
           <h2 class="titulo-tratamientos position-relative d-inline-block">
             Nuestros Tratamientos
+            <!-- Elemento para la línea subrayada animada -->
             <span class="subrayado-dinamico"></span>
           </h2>
         </div>
 
-        <!-- Swiper + Flechas dentro del contenedor alineador -->
+        <!-- Contenedor externo para alinear correctamente flechas y slider -->
         <div class="swiper-wrapper-externo">
+          <!-- Inicialización de Swiper -->
           <div class="swiper tratamientos-swiper">
+            <!-- Wrapper de las diapositivas -->
             <div class="swiper-wrapper">
               {% for tratamiento in tratamientos %}
+              <!-- Cada slide contiene un enlace a la vista de detalle -->
               <div class="swiper-slide">
                 <a
                   href="{% url 'detalle_tratamiento' tratamiento.id %}"
                   class="text-decoration-none text-dark"
                 >
+                  <!-- Tarjeta del tratamiento -->
                   <div
                     class="card h-100 shadow border-0 rounded-4 tratamiento-card"
                   >
                     {% if tratamiento.imagen %}
+                    <!-- Imagen principal del tratamiento -->
                     <img
                       src="{{ tratamiento.imagen.url }}"
                       class="card-img-top rounded-top-4 tratamiento-img"
                       alt="{{ tratamiento.nombre }}"
                     />
                     {% else %}
+                    <!-- Imagen por defecto si no hay imagen asociada -->
                     <img
                       src="{% static 'img/tratamiento-default.jpg' %}"
                       class="card-img-top rounded-top-4 tratamiento-img"
                       alt="Tratamiento"
                     />
                     {% endif %}
+                    <!-- Cuerpo de la tarjeta con información y botón -->
                     <div
                       class="card-body d-flex flex-column justify-content-between"
                     >
                       <div>
+                        <!-- Nombre del tratamiento -->
                         <h5 class="card-title text-center fw-bold text-dark">
                           {{ tratamiento.nombre }}
                         </h5>
+                        <!-- Duración -->
                         <p class="card-text text-muted small text-center">
                           Duración: {{ tratamiento.intervalo_minutos }} minutos
                         </p>
+                        <!-- Precio -->
                         <p class="card-text text-muted small text-center">
                           Precio: {{ tratamiento.precio }} CRC
                         </p>
                       </div>
+                      <!-- Botón de consulta por WhatsApp -->
                       <div class="text-center mt-3">
                         <a
                           href="https://api.whatsapp.com/send?phone=50661786012&text=Hola%2C%20me%20interesa%20el%20tratamiento%20{{ tratamiento.nombre }}"
@@ -79,7 +94,7 @@
               {% endfor %}
             </div>
 
-            <!-- Flechas -->
+            <!-- Botones de navegación Swiper -->
             <div class="swiper-button-prev custom-swiper-btn"></div>
             <div class="swiper-button-next custom-swiper-btn"></div>
           </div>
@@ -87,8 +102,10 @@
       </div>
     </section>
 
-    <!-- Scripts -->
+    <!-- Scripts necesarios al final para cargar más rápido -->
+    <!-- Swiper JS: funcionalidad del slider -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- JS personalizado para inicializar y configurar el slider -->
     <script src="{% static 'js/tratamientos.js' %}"></script>
   </body>
 </html>

@@ -1,9 +1,16 @@
 {% load static %}
+<!-- Carga la etiqueta {% static %} para servir archivos estáticos -->
+
+<!-- Enlaza el CSS específico del header -->
 <link rel="stylesheet" href="{% static 'css/header.css' %}" />
 
 <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm py-3">
+  <!-- Barra de navegación fija en la parte superior, con sombra y padding -->
+
   <div class="container">
-    <!-- Logo con imagen y nombre -->
+    <!-- Contenedor centrado de Bootstrap -->
+
+    <!-- Logo: imagen + nombre de la marca -->
     <a
       class="navbar-brand d-flex align-items-center fw-bold fs-4 logo-natura"
       href="#"
@@ -11,38 +18,46 @@
       <img
         src="{% static 'img/logo_header1.png' %}"
         alt="Logo Clínica Natura"
-        width="60"
-        height="60"
-        class="me-2"
+        width="60"                <!-- Ancho del ícono del logo -->
+        height="60"               <!-- Alto del ícono del logo -->
+        class="me-2"              <!-- Margin-end para separar del texto -->
       />
-      Clínica Natura
+      Clínica Natura          <!-- Texto del nombre de la marca -->
     </a>
 
+    <!-- Botón para colapsar el menú en dispositivos móviles -->
     <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#menu"
+      aria-controls="menu"      <!-- Accesibilidad: indica el menú colapsable -->
+      aria-expanded="false"     <!-- Estado inicial cerrado -->
+      aria-label="Toggle navigation" <!-- Etiqueta para lectores de pantalla -->
     >
       <span class="navbar-toggler-icon"></span>
+      <!-- Ícono estándar de Bootstrap para el toggler -->
     </button>
 
+    <!-- Elementos del menú que se ocultan en móvil y se muestran al togglear -->
     <div class="collapse navbar-collapse" id="menu">
+      <!-- Lista de enlaces de navegación -->
       <ul class="navbar-nav ms-auto me-3">
+        <!-- Enlace a sección Inicio -->
         <li class="nav-item">
           <a class="nav-link fw-semibold text-dark" href="#inicio">Inicio</a>
         </li>
+        <!-- Enlace a sección Tratamientos -->
         <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="#tratamientos"
-            >Tratamientos</a
-          >
+          <a class="nav-link fw-semibold text-dark" href="#tratamientos">Tratamientos</a>
         </li>
+        <!-- Enlace a sección Contacto -->
         <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="#contacto"
-            >Contacto</a
-          >
+          <a class="nav-link fw-semibold text-dark" href="#contacto">Contacto</a>
         </li>
       </ul>
+
+      <!-- Botón de llamada a la acción: Agendar Cita -->
       <a
         href="https://wa.me/50661786012?text=Hola%2C%20estoy%20interesado%20en%20agendar%20una%20cita%20en%20Cl%C3%ADnica%20Natura.%20%C2%BFPodr%C3%ADas%20ayudarme%3F"
         target="_blank"
@@ -51,5 +66,8 @@
         Agendar Cita
       </a>
     </div>
+    <!-- Fin del contenido colapsable del navbar -->
   </div>
+  <!-- Fin del container -->
 </nav>
+<!-- Fin de la barra de navegación -->

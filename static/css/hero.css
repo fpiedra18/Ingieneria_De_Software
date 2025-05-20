@@ -1,76 +1,80 @@
 /* ===== Hero ===== */
+
+/* Resalta partes del texto dentro del hero con el color principal */
 .hero-highlight {
-  color: #5dc1b9;
+  color: #5dc1b9; /* Agua marina para destacar keywords */
 }
 
+/* Título principal del hero */
 .titulo-hero {
-  font-size: 3rem;
-  font-weight: 700;
-  color: white;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  letter-spacing: 1px;
+  font-size: 3rem;                                 /* Tamaño grande para jerarquía */
+  font-weight: 700;                                /* Negrita para énfasis */
+  color: white;                                    /* Texto blanco sobre fondo oscuro */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);      /* Sombra sutil para legibilidad */
+  letter-spacing: 1px;                             /* Espacio entre letras */
 }
 
+/* Texto “destacado” con degradado animado */
 .destacado-natura {
-  font-weight: 800;
-  background: linear-gradient(135deg, #5dc1b9, #8cbfa7, #5dc1b9);
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: moveGradient 4s ease-in-out infinite;
+  font-weight: 800;                                /* Ultra-negrita para resaltar */
+  background: linear-gradient(135deg, #5dc1b9, #8cbfa7, #5dc1b9); /* Degradado diagonal */
+  background-size: 200% auto;                      /* Amplía el fondo para la animación */
+  background-clip: text;                           /* Recorta el fondo al texto */
+  -webkit-background-clip: text;                   /* Compatibilidad WebKit */
+  -webkit-text-fill-color: transparent;            /* Hace el texto transparente para ver el degradado */
+  animation: moveGradient 4s ease-in-out infinite; /* Ciclo infinito de animación */
 }
 
-/* Animación suave del degradado */
+/* Animación que desplaza el degradado de izquierda a derecha y vuelta */
 @keyframes moveGradient {
   0% {
     background-position: 0% center;
   }
-
   50% {
     background-position: 100% center;
   }
-
   100% {
     background-position: 0% center;
   }
 }
 
+/* Ajuste del fondo del hero en pantallas medianas */
 @media (max-width: 768px) {
   .hero-natura {
-    background-position: center top;
+    background-position: center top; /* Centra y sube la imagen en móviles/tablets */
   }
 }
 
+/* Botón de llamada a la acción dentro del hero */
 .btn-natura-hero {
-  background: linear-gradient(135deg, #5dc1b9, #8cbfa7);
-  color: white;
-  font-weight: 700;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #5dc1b9, #8cbfa7); /* Fondo degradado */
+  color: white;                                         /* Texto blanco */
+  font-weight: 700;                                     /* Negrita para visibilidad */
+  padding: 12px 30px;                                   /* Espaciado interno cómodo */
+  border: none;                                         /* Sin borde */
+  border-radius: 12px;                                  /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);             /* Sombra suave */
+  transition: all 0.3s ease;                            /* Transición en hover */
+  letter-spacing: 0.5px;                                /* Ligero espaciado entre letras */
 }
 
+/* Efecto hover del botón: ligero cambio de degradado y escala */
 .btn-natura-hero:hover {
-  background: linear-gradient(135deg, #4db0a5, #7da692);
-  transform: scale(1.05);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #4db0a5, #7da692); /* Degradado alternativo */
+  transform: scale(1.05);                                /* Zoom suave */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);             /* Sombra más intensa */
 }
 
+/* Contenedor del hero con imagen de fondo */
 .hero-natura {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: cover;       /* Cubre todo el contenedor */
+  background-position: center;  /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
 }
 
-
-
-  @media (max-width: 768px) {
-    .hero-natura {
-      background-position: center top;
-    }
+/* Repetición del ajuste responsivo (puede agruparse con el anterior) */
+@media (max-width: 768px) {
+  .hero-natura {
+    background-position: center top; /* Mejor enfoque en móviles */
   }
-
+}

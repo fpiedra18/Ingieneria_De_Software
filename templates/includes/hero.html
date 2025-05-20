@@ -1,26 +1,39 @@
 {% load static %}
+<!-- Carga la etiqueta {% static %} para servir archivos estáticos -->
 <link rel="stylesheet" href="{% static 'css/hero.css' %}" />
+<!-- Enlaza el CSS específico del hero -->
 
 <section 
   class="hero-natura d-flex align-items-center text-white"
   style="
-    min-height: 50vh;
-    padding-top: 80px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{% static "img/imagen2.png" %}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    min-height: 50vh; /* Altura mínima de la sección: 50% de la altura de la ventana */
+    padding-top: 80px; /* Espacio interno superior para compensar el navbar fijo */
+    /* Imagen de fondo con overlay oscuro para mejorar la legibilidad */
+    background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+      url('{% static "img/imagen2.png" %}');
+    background-size: cover;        /* Cubre todo el contenedor */
+    background-position: center;   /* Centra la imagen de fondo */
+    background-repeat: no-repeat;  /* No repite la imagen */
   "
 >
   <div class="container text-center">
+    <!-- Contenedor centrado para el contenido del hero -->
+
     <h1 class="titulo-hero mb-3">
       Bienvenido a <span class="destacado-natura">Clínica Natura</span>
+      <!-- Título principal con palabra destacada usando degradado animado -->
     </h1>
+
     <p class="lead mb-4">
       Bienestar, belleza y tecnología natural a tu alcance.
+      <!-- Subtítulo o texto de introducción -->
     </p>
+
     <a href="#tratamientos" class="btn btn-natura-hero btn-lg">
       Ver Tratamientos
+      <!-- Botón de llamada a la acción que enlaza a la sección de tratamientos -->
     </a>
   </div>
 </section>
+<!-- Fin de la sección hero -->
