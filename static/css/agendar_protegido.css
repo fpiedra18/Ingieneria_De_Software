@@ -1,85 +1,90 @@
-/* Variables de paleta */
 :root {
-  --color-primary: #5dc1b9;       /* Color principal (verde agua) */
-  --color-secondary: #48b3a9;     /* Color secundario */
-  --color-dark: #5e5e5e;          /* Color oscuro para texto o fondo */
-  --color-light: #fff6ed;         /* Fondo claro general */
-  --color-text: #333;             /* Color base del texto */
-  --bg-card: #5e5e5e;             /* Fondo para tarjetas/containers */
-  --bg-input: #fff;               /* Fondo para campos de texto */
-  --border-radius: 12px;          /* Bordes redondeados estándar */
-  --transition-fast: 0.3s ease;   /* Transición rápida para hover/focus */
+  --color-primary: #5dc1b9;
+  --color-secondary: #48b3a9;
+  --color-dark: #3B3B3B;
+  --color-light: #FAF9F6;
+  --color-text: #2C2C2C;
+  --bg-card: #FFFFFF;
+  --bg-input: #FFFFFF;
+  --border-radius: 12px;
+  --transition-fast: 0.3s ease;
+  --shadow-soft: 0 6px 16px rgba(0, 0, 0, 0.12);
+  --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
-
-/* Reset básico */
+/* === RESET === */
 * {
-  box-sizing: border-box;         /* Incluye padding y border en width/height */
+  box-sizing: border-box;
 }
 
-/* Estilo general del cuerpo del sitio */
 body {
   margin: 0;
-  background: var(--color-light);        /* Aplica fondo claro */
-  font-family: "Segoe UI", sans-serif;   /* Fuente del sitio */
-  color: var(--color-text);              /* Color de texto principal */
+  background: var(--color-light);
+  font-family: 'Quicksand', sans-serif;
+  color: var(--color-text);
 }
 
-/* Título principal de la clínica */
+/* === HEADER === */
 .nombre-clinica {
   text-align: center;
   font-size: 3rem;
   font-weight: bold;
   color: var(--color-primary);
   margin-bottom: 2rem;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);  /* Sombra suave */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Contenedor principal del formulario */
+/* === FORM CONTAINER === */
 .container-agendar {
   max-width: 900px;
   margin: auto;
   background: var(--bg-card);
   padding: 3rem;
   border-radius: var(--border-radius);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);  /* Sombra envolvente */
+  box-shadow: var(--shadow-strong); /* sombra más marcada */
 }
 
-/* Título del formulario */
+/* === FORM ELEMENTS === */
 .titulo-principal {
   text-align: center;
   font-size: 2.25rem;
   font-weight: 700;
-  color: var(--color-light);
+  color: var(--color-text);
   margin-bottom: 1.5rem;
 }
 
-/* Etiquetas (labels) del formulario */
 .form-label {
   display: block;
   font-weight: 600;
-  color: var(--color-light);
+  color: var(--color-text);
   margin-bottom: 0.5rem;
 }
 
-/* Campos de entrada y select */
 select, input[type="text"] {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
   border-radius: var(--border-radius);
   font-size: 1rem;
   background: var(--bg-input);
+  box-shadow: var(--shadow-soft);
   transition: border var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-/* Efecto al enfocar un input */
 select:focus, input:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 8px rgba(93, 193, 185, 0.4);
   outline: none;
 }
 
-/* Caja que muestra el resumen de la selección */
+/* === CALENDAR CONTAINER === */
+#calendarContainer {
+  max-width: 360px;
+  margin: auto 0;
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--border-radius);
+}
+
+/* === RESUMEN === */
 .resumen-box {
   background: var(--bg-input);
   border-left: 5px solid var(--color-primary);
@@ -88,46 +93,75 @@ select:focus, input:focus {
   border-radius: var(--border-radius);
   font-weight: 600;
   color: var(--color-dark);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-soft); /* más intensa */
 }
 
-/* Contenedor de horarios disponibles en formato grid */
+
+/* === HORARIOS DISPONIBLES === */
+#bloqueHorarios {
+  max-width: 100%;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
 #listaHorarios {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 0.75rem;
-  margin-top: 1rem;
+  display: block !important;
+  max-height: 320px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 1rem !important;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px !important;
+  scroll-behavior: smooth !important;
+  width: 100%;
+  max-width: 450px;
+ box-shadow: var(--shadow-strong); /* sombra visible en desktop y móvil */
+  border: 1px solid rgba(160, 214, 206, 0.6); /* borde más fuerte */
+  backdrop-filter: blur(6px);
 }
 
-/* Tarjetas individuales de horario */
 .opcion-hora {
-  background: var(--bg-input);
-  border: 2px solid var(--color-primary);
-  border-radius: var(--border-radius);
-  padding: 0.75rem;
-  text-align: center;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  width: 100% !important;
+  margin-bottom: 0.8rem !important;
+  padding: 1rem 1.5rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  background-color: #fff !important;
+  border: 2px solid var(--color-primary) !important;
+  border-radius: 12px !important;
+  color: var(--color-text) !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-soft); /* más profundidad */
 }
 
-/* Estilo al pasar el mouse por encima de una hora */
 .opcion-hora:hover {
-  background: var(--color-primary);
-  color: var(--color-light);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  background: var(--color-primary) !important;
+  color: var(--color-light) !important;
+  transform: scale(1.02);
+   box-shadow: var(--shadow-strong); /* resalta mejor en hover */
 }
 
-/* Estilo para la hora seleccionada */
 .opcion-hora.activo {
-  background: var(--color-secondary);
-  color: var(--color-light);
-  border-color: var(--color-secondary);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  background: var(--color-secondary) !important;
+  color: var(--color-light) !important;
+  border-color: var(--color-secondary) !important;
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(129, 200, 189, 0.25);
 }
 
-/* Botón personalizado principal */
+/* === SCROLLBAR === */
+#listaHorarios::-webkit-scrollbar {
+  width: 6px;
+}
+#listaHorarios::-webkit-scrollbar-thumb {
+  background: #b8c2c8;
+  border-radius: 10px;
+}
+
+/* === BOTÓN === */
 .btn-natura {
   background: var(--color-primary) !important;
   color: var(--color-light) !important;
@@ -138,65 +172,77 @@ select:focus, input:focus {
   border: none;
   transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
   display: inline-block;
+  box-shadow: var(--shadow-soft);
 }
 
-/* Efecto hover del botón */
 .btn-natura:hover {
   background: var(--color-secondary) !important;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(93,193,185,0.4);
+   box-shadow: var(--shadow-strong);
 }
 
-/* Estilo base para alertas */
+
+/* === ALERTAS === */
 .alert {
   border-radius: var(--border-radius);
   font-weight: 600;
   font-size: 1rem;
 }
 
-/* Contenedor del calendario (flatpickr) */
-#calendarContainer {
-  max-width: 360px;
-  margin: auto 0;
-}
-
-/* Días del calendario redondeados */
+/* === CALENDARIO === */
 .flatpickr-day {
   border-radius: 50% !important;
   transition: all var(--transition-fast);
 }
 
-/* Hover en día del calendario */
 .flatpickr-day:hover {
   background: var(--color-primary) !important;
   color: var(--color-light) !important;
   transform: scale(1.15);
 }
 
-/* Día seleccionado en el calendario */
 .flatpickr-day.selected {
   background: var(--color-secondary) !important;
   color: var(--color-light) !important;
 }
 
-/* Día de hoy en el calendario */
 .flatpickr-day.today {
-  background: #6b7e7c !important;  /* gris oscuro */
+  background: #6b7e7c !important;
   color: var(--color-light) !important;
 }
 
-/* Adaptación para pantallas pequeñas (responsive) */
+/* === RESPONSIVE === */
 @media (max-width: 768px) {
   .container-agendar {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    max-width: 100%;
+    width: 100%;
   }
+
   .titulo-principal {
     font-size: 1.75rem;
+    text-align: center;
   }
+
+  .form-label,
+  select,
+  input {
+    text-align: left;
+  }
+
   #listaHorarios {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    max-width: 100%;
+    margin: 0 auto;
   }
+
   .resumen-box {
-    padding: 0.75rem 1rem;
+    padding: 1rem;
+  }
+
+  #calendarContainer {
+    margin: 0 auto;
   }
 }

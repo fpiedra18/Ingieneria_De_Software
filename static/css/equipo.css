@@ -131,16 +131,35 @@
   width: 22%;                           /* Aproximado a 4 columnas en desktop */
 }
 
-/* Ajuste para tablets: 2 columnas */
-@media (max-width: 768px) {
-  .col-md-3 {
-    width: 45%;
-  }
-}
-
-/* Ajuste para móviles: 1 columna */
+/* Ajuste especial solo para celulares */
 @media (max-width: 576px) {
+  .team-member {
+    width: 140px;         /* Más pequeño que los 300px originales */
+    height: 140px;        /* Más bajo también */
+    margin-bottom: 20px;
+  }
+
+  .team-info {
+    font-size: 0.75rem;   /* Texto más pequeño dentro de la tarjeta */
+    padding: 6px;
+  }
+
+  .team-info h5 {
+    font-size: 0.9rem;
+  }
+
+  .team-info p {
+    font-size: 0.75rem;
+  }
+
+  .row {
+    flex-wrap: wrap;
+    gap: 15px;            /* Menos espacio entre tarjetas */
+  }
+
   .col-md-3 {
-    width: 100%;
+    width: auto;          /* Dejamos que se acomode según el tamaño reducido */
+    display: flex;
+    justify-content: center;
   }
 }

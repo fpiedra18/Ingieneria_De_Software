@@ -137,45 +137,61 @@ body {
 
 /* Imagen secundaria (más abajo) */
 .imagen-secundaria-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  width: 100%;
+  max-width: 280px;         /* Limita el ancho para que no se vea enorme */
+  margin: 0 auto 20px auto; /* Centrada y con espacio abajo */
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 .img-secundaria {
   width: 100%;
-  max-width: 500px;
-  height: 320px;
-  border-radius: 18px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease-in-out;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
 }
 
 .img-secundaria:hover {
   transform: scale(1.02); /* Efecto sutil al pasar el mouse */
 }
 
-/* ===== Diseño responsivo para móviles ===== */
-@media (max-width: 576px) {
-  .imagen-principal-wrapper {
-    max-width: 100%;
+/* === BOTÓN VOLVER DENTRO DE LA TARJETA === */
+.volver-wrapper {
+  padding: 20px 20px 0 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.btn-volver {
+  display: inline-block;
+  color: #4a7d74;
+  font-weight: 600;
+  text-decoration: none;
+  background-color: #e4f0ec;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.btn-volver:hover {
+  background-color: #4a7d74;
+  color: #fff;
+}
+
+/* === RESPONSIVO: CELULARES Y TABLETS === */
+@media (max-width: 768px) {
+  .volver-wrapper {
+    justify-content: center; /* Centra el botón en tablet y celular */
+    padding: 15px 10px 0 10px;
   }
 
-  .titulo-tratamiento {
-    font-size: 1.8rem;
-  }
-
-  .btn-agendar-profesional {
-    padding: 12px 25px;
-    font-size: 1.05rem;
-  }
-
-  .img-secundaria {
-    max-width: 100%;
-  }
-
-  .descripcion-detalle {
+  .btn-volver {
+    width: 100%;
+    text-align: center;
     font-size: 1rem;
-    line-height: 1.5;
+    padding: 10px;
   }
 }

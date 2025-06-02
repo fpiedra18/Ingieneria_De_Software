@@ -1,7 +1,5 @@
 {% load static %}
-<!-- Carga la etiqueta {% static %} para servir archivos estáticos -->
 
-<!-- Enlaza el CSS específico del header -->
 <link rel="stylesheet" href="{% static 'css/header.css' %}" />
 
 <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm py-3">
@@ -18,11 +16,12 @@
       <img
         src="{% static 'img/logo_header1.png' %}"
         alt="Logo Clínica Natura"
-        width="60"                <!-- Ancho del ícono del logo -->
-        height="60"               <!-- Alto del ícono del logo -->
-        class="me-2"              <!-- Margin-end para separar del texto -->
+        width="60"
+        height="60"
+        class="me-2"
       />
-      Clínica Natura          <!-- Texto del nombre de la marca -->
+      Clínica Natura
+      <!-- Texto del nombre de la marca -->
     </a>
 
     <!-- Botón para colapsar el menú en dispositivos móviles -->
@@ -31,9 +30,9 @@
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#menu"
-      aria-controls="menu"      <!-- Accesibilidad: indica el menú colapsable -->
-      aria-expanded="false"     <!-- Estado inicial cerrado -->
-      aria-label="Toggle navigation" <!-- Etiqueta para lectores de pantalla -->
+      aria-controls="menu"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
       <!-- Ícono estándar de Bootstrap para el toggler -->
@@ -49,11 +48,15 @@
         </li>
         <!-- Enlace a sección Tratamientos -->
         <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="#tratamientos">Tratamientos</a>
+          <a class="nav-link fw-semibold text-dark" href="#tratamientos"
+            >Tratamientos</a
+          >
         </li>
         <!-- Enlace a sección Contacto -->
         <li class="nav-item">
-          <a class="nav-link fw-semibold text-dark" href="#contacto">Contacto</a>
+          <a class="nav-link fw-semibold text-dark" href="#contacto"
+            >Contacto</a
+          >
         </li>
       </ul>
 

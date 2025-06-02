@@ -1,9 +1,12 @@
 {% load static %}
-<!-- Carga la etiqueta {% static %} para servir archivos estáticos -->
 
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agendar Cita - Clínica Natura</title>
@@ -154,6 +157,9 @@
     <!-- Flatpickr JS para calendario -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- JS personalizado que inicializa el calendario, muestra horarios y controla el formulario -->
+    <!-- Flatpickr en español -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+
     <script src="{% static 'js/agendar_protegido.js' %}"></script>
   </body>
 </html>

@@ -24,9 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
     inline: true, // Muestra el calendario de forma embebida
     minDate: fechaInput.getAttribute("data-fecha-hoy"), // Fecha mínima permitida
     dateFormat: "Y-m-d", // Formato de fecha
-    locale: {
-      firstDayOfWeek: 1, // Lunes como primer día de la semana
-    },
+    locale: flatpickr.l10ns.es, // 👉 Esto pone el calendario en español 
+    
     onChange: function (selectedDates, dateStr) {
       // Al cambiar la fecha, actualiza el input y carga los horarios
       fechaInput.value = dateStr;
@@ -98,11 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     formFinal.style.display = "block";
     formFinal.scrollIntoView({ behavior: "smooth", block: "start" });
 
-    // Deshabilita el resto de opciones para evitar doble selección
-    document.querySelectorAll(".opcion-hora").forEach((h) => {
-      h.style.pointerEvents = "none";
-      h.style.opacity = "0.6";
-    });
+   
   }
 
   // Formateo automático del número de teléfono mientras se escribe
