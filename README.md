@@ -1,4 +1,4 @@
-# NaturaClick
+# Natura
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](#) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](#) [![Python](https://img.shields.io/badge/python-3.9+-blue)](#) [![Django](https://img.shields.io/badge/django-4.x-green)](#)
 
@@ -6,7 +6,7 @@
 
 ## 📋 Descripción
 
-NaturaClick es una plataforma web integral diseñada para **Clínica Natura** que facilita el agendamiento de tratamientos estéticos de forma rápida y profesional. Los usuarios pueden:
+NaturaC es una plataforma web integral diseñada para **Clínica Natura** que facilita el agendamiento de tratamientos estéticos de forma rápida y profesional. Los usuarios pueden:
 
 * Visualizar el catálogo de tratamientos en un carrusel interactivo.
 * Consultar detalles de cada tratamiento (duración, precio, imagen y descripción).
@@ -18,7 +18,7 @@ El panel de administración permite a los encargados de la clínica gestionar tr
 
 ---
 
-## 🚀 Funcionalidades principales
+##  Funcionalidades principales
 
 1. **Catálogo de tratamientos**: Carrusel responsive con Swiper.js.
 2. **Detalles de tratamiento**: Vista individual con información completa y botón de consulta.
@@ -34,7 +34,7 @@ El panel de administración permite a los encargados de la clínica gestionar tr
 
 ---
 
-## 🛠️ Tecnologías
+##  Tecnologías
 
 * **Backend**: Python 3.9+, Django 4.x
 * **Frontend**: Django Templates, HTML5, CSS3 (Tailwind CSS), JavaScript (Swiper.js)
